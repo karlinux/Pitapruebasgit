@@ -41,7 +41,7 @@ public class Buscarpita extends AppCompatActivity {
     EditText etNombre;
 
     ListView list;
-    String n, r, imeistring;
+    String n, r, imeistring, puntoTactico;
     int sinc, seg;
     Button btnSalir, btnSiguiente;
     Bundle cuices, nombre;
@@ -107,6 +107,7 @@ public class Buscarpita extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                puntoTactico = etNombre.getText().toString().trim();
                 if(!etNombre.getText().toString().equals("")) {
                     inserta.abrir();
                     inserta.insertarReg(etNombre.getText().toString(), imeistring, "1");
