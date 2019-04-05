@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/back"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_height="70dp"/>
+        <TextView
+            android:id="@+id/tvNumero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Versión 1.00"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:textStyle="normal|bold" />
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="Usuario"
+            android:inputType="textCapCharacters">
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="Contraseña"
+            android:inputType="numberPassword" />
+        <TextView
+            android:id="@+id/tvImei"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:text="Versión 1.00"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold" />
+        <Button
+            android:id="@+id/btnBoton"
+            android:layout_width="@dimen/anchoboton"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/borde"
+            android:textColor="@color/colortextobotones"
+            android:text="Ingresar"
+            android:textSize="@dimen/textoboton"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

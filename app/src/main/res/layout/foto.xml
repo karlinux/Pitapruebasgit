@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fotopita">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/back"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_height="70dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FECHA"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/tvFecha"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFoto"
+        android:src="@drawable/zc4000"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:layout_weight="0.03" />
+    <TextView
+        android:id="@+id/tvNumero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FOTO"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/tvPosicion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomar foto en esta posición"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"
+        android:textStyle="normal|bold" />
+    <EditText
+        android:id="@+id/etCarril"
+        android:layout_width="@dimen/anchodireccion"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="14sp"
+        android:hint="Carril"
+        android:inputType="textCapCharacters"/>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rgDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbDoc12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Encuesta de percepción" />
+
+        <RadioButton
+            android:id="@+id/rbDoc13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:checked="false"
+            android:text="Instrumento de supervisión" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spDocumento"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/razonseparacion"
+        android:spinnerMode="dialog" />
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="@dimen/anchoboton"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/borde"
+        android:textColor="@color/colortextobotones"
+        android:text="Guardar"
+        android:textSize="@dimen/textoboton"/>
+    <Button
+        android:id="@+id/btnFinalizar"
+        android:layout_width="@dimen/anchoboton"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/borde"
+        android:textColor="@color/colortextobotones"
+        android:text="Finalizar"
+        android:textSize="@dimen/textoboton"/>
+    <Button
+        android:id="@+id/btnRegresar"
+        android:layout_width="@dimen/anchoboton"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/borde"
+        android:textColor="@color/colortextobotones"
+        android:text="Regresar"
+        android:textSize="@dimen/textoboton"/>
+</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

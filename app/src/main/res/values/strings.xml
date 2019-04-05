@@ -1,0 +1,399 @@
+<resources>
+    <string name="app_name">Pita</string>
+    <string name="action_settings">Settings</string>
+    <string name="anterior">ANTERIOR</string>
+    <string name="siguiente">SIGUIENTE</string>
+    <string name="periodo">El periodo de encuesta terminó </string>
+    <string name="inhabilitar">Este dispositivo no se encuentra habilitado comuniquese con el administrador </string>
+    <string name="version">Para seguir utiliando esta aplicación es necesario descargar la nueva versión </string>
+
+    <string-array name="si_no">
+        <item>0-SELECCIONE</item>
+        <item>1-Si A partir de qué año la empresa cuenta con certificación? 8888 No sabe</item>
+        <item>2-No Por qué ya no cuenta con certificación?</item>
+    </string-array>
+
+    <string-array name="p1_1">
+        <item>0-SELECCIONE</item>
+        <item>1-SI</item>
+        <item>2-NO</item>
+    </string-array>
+
+    <string-array name="p2_7">
+        <item>0-SELECCIONE</item>
+    </string-array>
+
+    <string-array name="p2_9">
+        <item>0-SELECCIONE</item>
+    </string-array>
+
+    <string-array name="carriles">
+        <item>0-SELECCIONE CARRIL</item>
+        <item>1-CARRIL 1</item>
+        <item>2-CARRIL 2</item>
+        <item>3-CARRIL 3</item>
+        <item>4-CARRIL 4</item>
+        <item>5-CARRIL 5</item>
+        <item>6-CARRIL 6</item>
+        <item>7-CARRIL 7</item>
+        <item>8-CARRIL 8</item>
+        <item>9-CARRIL 9</item>
+        <item>10-CARRIL 10</item>
+        <item>11-CARRIL 11</item>
+    </string-array>
+
+    <string-array name="documento">
+        <item>0-SELECCIONE TIPO DE DOCUMENTO</item>
+        <item>12-Encuesta de percepción</item>
+        <item>13-Instrumento de supervisión</item>
+    </string-array>
+
+    <string-array name="entidad">
+        <item>0-SELECCIONE ENTIDAD</item>
+        <item>1-AGUASCALIENTES</item>
+        <item>2-BAJA CALIFORNIA</item>
+        <item>3-BAJA CALIFORNIA SUR</item>
+        <item>4-CAMPECHE</item>
+        <item>5-COAHUILA DE ZARAGOZA</item>
+        <item>6-COLIMA</item>
+        <item>7-CHIAPAS</item>
+        <item>8-CHIHUAHUA</item>
+        <item>9-DISTRITO FEDERAL</item>
+        <item>10-DURANGO</item>
+        <item>11-GUANAJUATO</item>
+        <item>12-GUERRERO</item>
+        <item>13-HIDALGO</item>
+        <item>14-JALISCO</item>
+        <item>15-MEXICO</item>
+        <item>16-MICHOACAN DE OCAMPO</item>
+        <item>17-MORELOS</item>
+        <item>18-NAYARIT</item>
+        <item>19-NUEVO LEON</item>
+        <item>20-OAXACA</item>
+        <item>21-PUEBLA</item>
+        <item>22-QUERETARO</item>
+        <item>23-QUINTANA ROO</item>
+        <item>24-SAN LUIS POTOSI</item>
+        <item>25-SINALOA</item>
+        <item>26-SONORA</item>
+        <item>27-TABASCO</item>
+        <item>28-TAMAULIPAS</item>
+        <item>29-TLAXCALA</item>
+        <item>30-VERACRUZ DE IGNACIO DE LA LLAVE</item>
+        <item>31-YUCATAN</item>
+        <item>32-ZACATECAS</item>
+    </string-array>
+    <string-array name="numpregunta">
+    <item></item>
+    <item>2.1.1. </item>
+    <item>2.1.2. </item>
+    <item>2.1.3. </item>
+    <item>2.1.4. </item>
+    <item>2.1.5. </item>
+    <item>2.1.6. </item>
+    <item>2.1.7. </item>
+    <item>2.1.8. </item>
+    <item>2.2.1. </item>
+    <item>2.2.2. </item>
+    <item>2.2.3. </item>
+    <item>2.2.4. </item>
+    <item>2.2.5. </item>
+    <item>2.2.6. </item>
+    <item>2.3.4. </item>
+    <item>2.3.2. </item>
+    <item>2.3.3. </item>
+    <item>2.3.1. </item>
+    <item>2.3.5. </item>
+    <item>2.3.6. </item>
+    <item>2.3.7. </item>
+    <item>2.3.8. </item>
+    <item>3.1.1. </item>
+    <item>3.1.2. </item>
+    <item>3.1.3. </item>
+
+    <item></item>
+    </string-array>
+
+    <string-array name="preguntaspita">
+    <item></item>
+    <item> Contratación de video vigilancia PITA</item>
+    <item> Estatus de las cámaras convencionales</item>
+    <item> Estatus de los coaxiales</item>
+    <item> Estatus de las canalizaciones (charola, tubería, subterránea, etc.)</item>
+    <item> Estatus de los cables UTP</item>
+    <item> Estatus de las fibras ópticas</item>
+    <item> Estatus de los postes de 6 o 12 metros</item>
+    <item> Estatus de las tierras físicas</item>
+    <item> Estatus de los postes de 25 metros</item>
+    <item>Estatus de las cámaras térmicas</item>
+
+    <item>Estatus de los registros</item>
+    <item>Estatus de los cables UTP</item>
+    <item>Estatus de las fibras ópticas</item>
+    <item>Estatus de las tierras físicas</item>
+    <item>Estatus de los audífonos</item>
+    <item>Estatus de los teclados</item>
+    <item>Estatus de los mouse</item>
+    <item>Estatus de los monitores</item>
+    <item>Estatus de los CPU</item>
+    <item>Estatus de los cables UTP</item>
+
+    <item>Estatus de las fibras ópticas</item>
+    <item>Estatus de las canalizaciones (charola, tubería, subterránea, etc.)</item>
+    <item>Contratación de obra con recursos PITA para carriles de ligeros</item>
+    <item>Número de carriles ligeros contratados con recursos PITA</item>
+    <item>Estatus de los carriles ligeros contratados con PITA</item>
+    <item>Estatus del panel de disponibilidad de carril</item>
+    <item>Estatus del semáforo avance/espere</item>
+    <item>Estatus de la cámara de placa delantera</item>
+    <item>Estatus de la cámara de placa trasera</item>
+    <item>Estatus de la cámara de imagen ambiental</item>
+    <item>Estatus de la cámara de rostros (imagen del conductor)</item>
+    <item>Estatus del perfilador</item>
+    <item>Estatus de la esclusa hidráulica</item>
+    <item>Estatus de la fotocélula (no obligatorias, fue una mejora)</item>
+    <item>Estatus del panel de disponibilidad de carril</item>
+    <item>Estatus del semáforo avance/espere</item>
+    <item>Estatus de la cámara de placa delantera</item>
+    <item>Estatus de la cámara de placa trasera</item>
+    <item>Estatus de la cámara de imagen ambiental</item>
+    <item>Estatus de la cámara de rostros (imagen del conductor)</item>
+    <item>Estatus del perfilador</item>
+    <item>Estatus de la esclusa hidráulica</item>
+    <item>Estatus de la fotocélula (no obligatorias, fue una mejora)</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión</item>
+    <item>Estatus del kiosco de inspección</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión</item>
+    <item>Estatus del kiosco de inspección</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión</item>
+    <item>Estatus del kiosco de inspección</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión</item>
+    <item>Estatus del kiosco de inspección</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Contratación de equipos móviles PITA</item>
+    <item>Número de equipos móviles contratados con recursos PITA</item>
+    <item>Estatus de los equipos móviles</item>
+    <item>Estatus del toughpad</item>
+    <item>Estatus del cargador</item>
+    <item>Estatus de la funda</item>
+    <item>Contratación de obra con recursos PITA para carriles de carga</item>
+    <item>Número de carriles de carga contratados con recursos PITA</item>
+    <item>Estatus de los equipos móviles</item>
+    <item>Estatus de la señal de entrada a carril de carga</item>
+    <item>Estatus del panel de disponibilidad (poste ménsula o techumbre)</item>
+    <item>Estatus del semáforo avance/espera</item>
+    <item>Estatus del Lector de placa trasera</item>
+    <item>Estatus del sensor de Cortina</item>
+    <item>Estatus del sensor de presencia</item>
+    <item>Estatus del lector de número de contenedor</item>
+    <item>Estatus del sistema de verificación de vacíos</item>
+    <item>Estatus del lector de placa delantera</item>
+    <item>Estatus del interfon de dos niveles</item>
+    <item>Estatus de la antena RFID</item>
+    <item>Estatus de la controladora</item>
+    <item>Estatus del panel informativo</item>
+    <item>Estatus de la alarma sonora y visual</item>
+    <item>Estatus de la esclusa-barrera</item>
+    <item>Estatus del ponchallantas (sólo salida)</item>
+    <item>Estatus de la señalización en general (letreros)</item>
+    <item>Contratación de obra con recursos PITA para posiciones de control de carga peatonal</item>
+    <item>Número de posiciones de control de carga peatonal contratados con recursos PITA</item>
+    <item>Estatus de las posiciones de control de carga peatonal contratados con PITA</item>
+    <item>Estatus del panel informativo electrónico de carril</item>
+    <item>Estatus de los sensores de detección de persona en carril</item>
+    <item>Estatus de la barrera de paso peatonal (puertas abatibles)</item>
+    <item>Estatus del controlador para regular y monitorear todos los dispositivos</item>
+    <item>Estatus de la lectora RFID de proximidad</item>
+    <item>Estatus del Interfón de un nivel</item>
+    <item>Estatus de la alarma sonora y visual</item>
+    <item>Estatus de la señalización en general (letreros)</item>
+    <item>Contratación de obra con recursos PITA para posiciones de control de carga peatonal</item>
+    <item>Estatus del equipo móvil</item>
+    <item>Estatus del panel Informativo(zona de espera y de revisión)</item>
+    <item>Estatus del Acces Point</item>
+    <item>Estatus de la señalización en general (letreros)</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión de carga</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Estatus de los sensores de presencia</item>
+    <item>Estatus de la antena banner</item>
+    <item>Estatus de la señalización en general(letreros)</item>
+    <item>Estatus de la posición de control en andén de plataforma</item>
+    <item>Contratación de obra con recursos PITA para zona de revisión de carga</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Estatus de los sensores de presencia</item>
+    <item>Estatus de la antena banner</item>
+    <item>Estatus de la señalización en general(letreros)</item>
+    <item>Estatus de la posición de control en andén de plataforma</item>
+    <item>Contratación de obra con recursos PITA para centro de monitoreo</item>
+    <item>Estatus de los espacios para operadores de despacho aduanero de mercancía de carga</item>
+    <item>Estatus del espacio para posición de monitoreo de carga con cupo para dos monitores, conectado a la red LAN</item>
+    <item>Estatus de los equipos de audio (diadema y micrófono) para comunicarse con el interfón de las posiciones de control asignadas</item>
+    <item>Estatus del software cliente de visualización y de audio</item>
+    <item>Estatus de las estaciones de trabajo y sillas para operadores de despacho aduanero de mercancía de carga</item>
+    <item>Estatus del espacio de operadores de rayos gamma/X</item>
+    <item>Estatus de las estaciones de trabajo y sillas para operadores de rayos gamma/X</item>
+    <item>Estatus del espacio, servicios eléctricos y de comunicaciones para el equipo de análisis conectado a la red LAN</item>
+    <item>Estatus del espacio de cuarto de comunicaciones</item>
+    <item>Estatus del diseño y de cálculo de la estructura del centro de monitoreo</item>
+    <item>Estatus de las preparaciones para instalaciones (datos, contactos eléctricos normales, regulados y de emergencia)</item>
+    <item>Estatus del control de acceso al Centro de Monitoreo, operadores de video-vigilancia, cuarto de comunicaciones</item>
+    <item>Estatus del suministro e instalación de infraestructura auxiliar Marque con 1(uno) la infraestructura auxiliar suministrada y con 0 (cero) los conceptos no suministrados:</item>
+    <item>Estatus de los aires acondicionados para cada uno de los espacios que conformen el centro de monitoreo incluyendo las áreas comunes</item>
+    <item>Estatus del sistema de alarma y detección de humo para el centro de monitoreo</item>
+    <item>Estatus del suministro de extintores de gas halón tipo ABC</item>
+    <item>Estatus de la señalización informativa y preventiva</item>
+    <item>Estatus del suministro e instalación de un pararrayos (conforme al estudio técnico y aprobación del cuerpo de gobierno)</item>
+    <item>Estatus de la preparación de tuberías para el suministro de servicios regulados y de datos del SAT</item>
+    <item>Estatus del sistema Operativo del Centro de Monitoreo</item>
+    <item>Estatus del equipo de comunicación del interfón con las posiciones de control</item>
+    <item>Estatus del suministro y control de los botones de emergencia por operador</item>
+    <item>Estatus del sistema de alarma y detección de humo para el centro de monitoreo</item>
+    <item>Estatus dve la instalación y configuración de la red LAN y su integración a la WAN del SAT</item>
+    <item>Estatus del aplicativo desarrollado exprofeso para el SAT</item>
+    <item>Estatus del movimiento físico de los componentes de monitoreo de video-vigilancia</item>
+    <item>Estatus de las estaciones instaladas en el centro de monitoreo</item>
+    <item>Estatus del sistema de detección y supresión de fuego apropiado e independiente para el cuarto de comunicaciones.</item>
+    <item>Contratación de mobiliario y equipo necesario PITA</item>
+    <item>Estatus de las sillas para operadore (ergonómica, con descansabrazos, altura regulable y con ruedas)</item>
+    <item>Estatus de las estaciones de trabajo</item>
+    <item>Estatus de los archiveros de tres cajones</item>
+    <item>Estatus de las posiciones de monitoreo de carga por operador (equipo de cómputo personal)</item>
+    <item>Estatus de las posiciones de monitoreo básica por operador de video-vigilancia (equipo de cómputo personal)</item>
+    <item>Estatus de las posiciones de monitoreo avanzada por operador de video-vigilancia</item>
+    <item>Contratación de Carriles Administrados</item>
+    <item>Número de Carriles Administrados</item>
+    <item>Estatus de los Carriles Administrados</item>
+    <item>Carril administrado No</item>
+    <item>Estatus del módulo</item>
+    <item>Estatus de la pantalla informativa</item>
+    <item>Estatus del UCC</item>
+    <item>status del semáforo de tres luces</item>
+    <item>Estatus de la alarma sonora</item>
+    <item>Estatus de la alarma visual</item>
+    <item>Estatus del gabinete de barrera</item>
+    <item>Estatus de la barrera de paso</item>
+    <item>Estatus de los sensores de presencia (lazos)</item>
+    <item>Estatus del ponchallantas (solo salida)</item>
+    <item>Contratación de Infraestructura auxiliar PITA</item>
+    <item>Estatus del espacio para planta de emergencia</item>
+    <item>Estatus de planta de emergencia</item>
+    <item>Estatus de IDF ́s. (cuarto de comunicaciones que se usa de forma intermedia para poder conectar elementos a la red del SAT)</item>
+    <item>Contratación de sistemas informáticos PITA</item>
+    <item>Estatus del sistema SIAVE</item>
+    <item>Estatus del sistema SIECA</item>
+    <item>Estatus del sistema SIRIA</item>
+    <item></item>
+    <item></item>
+    <item></item>
+    <item></item>
+    <item></item>
+    </string-array>
+
+    <string-array name="punto2_1_2">
+    <item>1.-Ya están operando</item>
+    <item>2.-Están en pruebas o listas para pruebas</item>
+    <item>3.-No están operando, ni en pruebas o listos para pruebas</item>
+    </string-array>
+
+    <string-array name="punto2_1_3">
+    <item>1.-Ya están operando</item>
+    <item>2.-Están en pruebas o listas para pruebas</item>
+    <item>3.-No están operando, ni en pruebas o listos para pruebas</item>
+    </string-array>
+
+    <string-array name="preguntas">
+        <item></item>
+        <item>.- ¿En este Punto Táctico se realizó obra de construcción o remodelación con recursos de PITA?</item>
+        <item>.- ¿Es usted el responsable directo de la obra?</item>
+        <item>.- ¿Conoce usted los alcances de obra?</item>
+        <item>.- ¿Cuenta usted con planos arquitectónicos, memoria descriptiva de la obra a realizar y las especificaciones generales de obra?</item>
+        <item>.- ¿Se tienen en regla los permisos de construcción de obra?</item>
+        <item>.- ¿Existe un residente de obra?</item>
+        <item>.- ¿Se incrementaron las obras inicialmente contempladas?</item>
+        <item>.- ¿En qué áreas se está realizado construcción, modificación o ampliaciones de obra con recursos PITA?</item>
+        <item>.- ¿Se cuenta con bitácora de control de obra diaria y evidencia fotográfica?</item>
+        <item>.- ¿Cuenta con estimaciones de obra?</item>
+        <item>.- ¿Se está operando actualmente en las áreas ya terminadas? </item>
+        <item>.- ¿Conoce usted la fecha de entrega de la obra?</item>
+        <item>.- ¿Interfieren los trabajos de obra en el proceso de operación aduanal?</item>
+        <item>.- ¿La infraestructura tecnológica está funcionando correctamente?</item>
+        <item>.- ¿Todos los equipos cuentan con la instalación del  software necesario para operar PITA?</item>
+        <item>.- ¿Las cámaras de videovigilancia se encuentran correctamente instaladas? </item>
+        <item>.- ¿El sistema (software) de video vigilancia está operando completamente?</item>
+        <item>.- ¿Los sistemas de sensores, semáforos, señalización digital, lectores, panel informativo, interfón y alarmas, de los carriles, operan correctamente?</item>
+        <item>.- ¿Los sistemas de información, comunicación y tecnología funcionan correctamente?</item>
+        <item>.- ¿Desde su perspectiva, coménteme en orden de importancia (considerando que la primera es la más importante) las tres principales mejoras que se deben atender en la parte de sistemas y videovigilancia para mejorar la operación?</item>
+        <item>.- ¿Los recursos humanos existentes, cuentan con habilidades y conocimientos para desarrollo de sus actividades?</item>
+        <item>.- Del personal capacitado sobre PITA, actualmente ¿cuántos están operando PITA?</item>
+        <item>.- ¿Se cuenta con material de apoyo para resolver dudas y/o problemas de operación propias del puesto y de funcionamiento de PITA?  </item>
+        <item>.- ¿Se tiene evidencia de la capacitación?</item>
+        <item>.- ¿Se llevan a cabo reuniones continuas o coaching al personal que opera PITA, para detectar y recibir retroalimentación? </item>
+        <item>.- ¿Se tiene un manual, procedimiento o documento que les permita atender contingencias por fallas en los sistemas automatizados del PITA? </item>
+        <item>.- ¿Cuántos trabajadores emplea de manera permanente PITA?</item>
+        <item>.- Nombre del entrevistado: </item>
+        <item>.- Cargo del entrevistado:</item>
+        <item>.- Correo electrónico del entrevistado:</item>
+    </string-array>
+    <array name="restext">
+        <item>1.- Cuenta con Resolución favorable en materia de impacto ambiental </item>
+        <item>2.- Cuenta con Constancia expedida por la autoridad competente respecto de la congruencia del uso del suelo solicitado, con el uso del suelo, conforme a lo previsto programas de ordenamiento ecológico territorial y/o programa de desarrollo urbano vigente</item>
+        <item>3.- Cuenta usted con copia de los Comprobante de pago vigente de los permisos de construcción correspondiente</item>
+        <item>4.- Cuenta con las concesiones, permisos o autorizaciones para el uso o aprovechamiento de los inmuebles federales que otorga y expide el Instituto de Administración y Avalúos de Bienes Nacionales (INDAABIN)</item>
+        <item>5.- Otro</item>
+    </array>
+    <array name="p1_8">
+        <item>1.- Carriles de carga</item>
+        <item>2.- Carriles de ligeros</item>
+        <item>3.- Tramo para desaduanización </item>
+        <item>4.- Área para amarillos </item>
+        <item>5.- Plataforma para rojos </item>
+        <item>6.- Oficina para control y monitoreo </item>
+        <item>7.- Construcción para albergar  la planta de emergencia</item>
+        <item>8.- Área para rayos X </item>
+        <item>9.- Área para rayos gama </item>
+        <item>10.- Otros</item>
+    </array>
+    <array name="p1_13">
+        <item>1.- Se para la operación y con ello el proceso se vuelve intermitente.</item>
+        <item>2.- Se produce cuello de botella.</item>
+        <item>3.- Se vuelve vulnerable la seguridad del área.</item>
+        <item>4.- Otros</item>
+    </array>
+    <array name="p1_15">
+        <item>1.- No se tiene el equipo de cómputo físicamente.</item>
+        <item>2.- El equipo no tiene las características mínimas requeridas.</item>
+        <item>3.- El cableado y canalizado de cables no está terminado.</item>
+        <item>4.- No tiene las licencias o son insuficientes.</item>
+        <item>5.- Otros</item>
+    </array>
+    <array name="p1_16">
+        <item>1.- Aún no se cuenta físicamente con ellas.</item>
+        <item>2.- Se están instalando. ¿fecha prevista para concluir instalación?</item>
+        <item>3.- El cableado y canalizado no está terminado.</item>
+        <item>4.- Otros</item>
+    </array>
+
+    <array name="p2_4">
+        <item>1.- Análogas.</item>
+        <item>2.- Ip</item>
+        <item>3.- Exterior fija</item>
+        <item>4.- Exterior fija infrarroja</item>
+        <item>5.- PTZ</item>
+        <item>6.- PTZ infrarroja</item>
+        <item>7.- Interior panorámica</item>
+        <item>8.- Interior fija con audio</item>
+        <item>9.- Interior fija infrarroja</item>
+    </array>
+
+    <array name="p2_4_2">
+        <item>0-SELECCIONE.</item>
+        <item>1-Faltan cámaras por instalar.</item>
+        <item>2-Calidad de imagen no funcional</item>
+        <item>3-Otro</item>
+    </array>
+
+</resources>
+

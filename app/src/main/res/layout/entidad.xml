@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Universospita">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/back"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_height="70dp"/>
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FECHA"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/negro"
+            android:textSize="12sp"
+            android:textStyle="normal|bold" />
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FECHA"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/negro"
+            android:textSize="12sp"
+            android:textStyle="normal|bold" />
+        <Spinner
+            android:id="@+id/spEntidad"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/razonseparacion"
+            android:spinnerMode="dialog" />
+
+        <Spinner
+            android:id="@+id/spMunicipio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/razonseparacion"
+            android:spinnerMode="dialog" />
+        <Spinner
+            android:id="@+id/spLocalidad"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/razonseparacion"
+            android:spinnerMode="dialog" />
+        <EditText
+            android:id="@+id/etColonia"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:inputType="textCapSentences"
+            android:hint="COLONIA"/>
+        <Button
+            android:id="@+id/btnIniciar"
+            android:layout_width="@dimen/anchoboton"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/razonseparacion"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/borde"
+            android:text="GUARDAR"
+            android:textColor="@color/colortextobotones"
+            android:textSize="@dimen/textoboton"/>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

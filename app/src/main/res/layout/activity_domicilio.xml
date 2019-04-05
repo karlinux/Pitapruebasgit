@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Domiciliopita">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/back"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:src="@drawable/logo"
+            android:layout_height="70dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvVersion"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="normal|bold" />
+
+        <EditText
+            android:id="@+id/etCp"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:inputType="number"
+            android:hint="CÓDIGO POSTAL"/>
+        <EditText
+            android:id="@+id/etEntidad"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:inputType="textCapSentences"
+            android:hint="ENTIDAD"/>
+        <EditText
+            android:id="@+id/etMunicipio"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:inputType="textCapSentences"
+            android:hint="MUNICIPIO"/>
+        <Spinner
+            android:id="@+id/spColonia"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:spinnerMode="dialog" />
+        <EditText
+            android:id="@+id/etColonia"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:inputType="textCapSentences"
+            android:hint="COLONIA"/>
+        <EditText
+            android:id="@+id/etCalle"
+            android:layout_width="@dimen/anchodireccion"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14sp"
+            android:inputType="textCapSentences"
+            android:hint="CALLE"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/etNumExt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:inputType="textCapSentences"
+            android:hint="NÚMERO EXTERIOR"/>
+        <EditText
+            android:id="@+id/etNumInt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:inputType="textCapSentences"
+            android:hint="NÚMERO INTERIOR"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnRegresar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/borde"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/colortextobotones"
+                android:text="@string/anterior"
+                android:textSize="@dimen/textoboton"/>
+            <Button
+                android:id="@+id/btnIniciar"
+                android:layout_width="0dp"
+                android:background="@drawable/borde"
+                android:layout_weight="1"
+                android:textColor="@color/colortextobotones"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/siguiente"
+                android:textSize="@dimen/textoboton"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
