@@ -172,6 +172,7 @@ public class Domiciliopita extends AppCompatActivity {
 
             }
         });
+
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,6 +181,7 @@ public class Domiciliopita extends AppCompatActivity {
                 finish();
             }
         });
+
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

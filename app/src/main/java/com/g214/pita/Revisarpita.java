@@ -92,7 +92,15 @@ public class Revisarpita extends AppCompatActivity {
         inserta.abrir();
         Cursor cur= inserta.revisar();
         while (cur.moveToNext()) {
-            listItems.add(new Entidad(cur.getString(0),cur.getString(1), "Punto Táctico \n"+cur.getString(2)+"\n"+cur.getString(1)));//id
+            String sincronizado = "";
+            if(cur.getString(1).equals("1")){
+                sincronizado = "SINCRONIZADO";
+            }else{
+                sincronizado = "NO SINCRONIZADO";
+            }
+            listItems.add(new Entidad(cur.getString(0),cur.getString(1),
+                    "Punto Táctico \n"+cur.getString(2)+"\n"+cur.getString(1)
+                            +"\n"+sincronizado));//id
         }
         cur.close();
         inserta.close();

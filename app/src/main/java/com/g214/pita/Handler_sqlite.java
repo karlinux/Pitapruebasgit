@@ -19,9 +19,12 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	private String login = "login";
 	private String imagenes = "imagenes";
 
-	private String SQLUpdateV2 = "ALTER TABLE encuesta ADD COLUMN TIPO text DEFAULT '0'";
-	private String SQLUpdateV3 = "ALTER TABLE encuesta ADD COLUMN RESPONSABLEPITA text DEFAULT '0'";
-	private String SQLUpdateV4 = "ALTER TABLE encuesta ADD COLUMN CORREO text DEFAULT '@'";
+	private String SQLUpdateV2 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_LIGERO text DEFAULT '0'";
+	private String SQLUpdateV3 = "ALTER TABLE encuesta ADD COLUMN NUM_EQUIPOS_MOVILES text DEFAULT '0'";
+	private String SQLUpdateV4 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0'";
+	private String SQLUpdateV5 = "ALTER TABLE encuesta ADD COLUMN NUM_CARGA_PEATONAL text DEFAULT '0'";
+	private String SQLUpdateV6 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_ADMIN text DEFAULT '0'";
+	private String SQLUpdateV7 = "ALTER TABLE encuesta ADD COLUMN CENTROS_REVISION text DEFAULT '0'";
 
 
 	String query5 = "CREATE TABLE "+bitacora+"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -30,7 +33,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 	public Handler_sqlite(Context ctx) {
 
-		super(ctx, "mibase", null, 1);
+		super(ctx, "mibase", null, 2);
 	}
 
 	@Override
@@ -39,11 +42,12 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			// FOLIOENCUESTA = _ID imei fecha de la tabla encuesta
 		String query = "CREATE TABLE "+ encuesta +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, FOLIOENCUESTA text, IDCUESTIONARIO text, " +
 				"CODIGORESULTADO text DEFAULT '0', CVEENT text, CVEMUN text, CVELOC text, COLONIA text, RECINTOADUANAL text, EMPRESA text, " +
-				"CALLE text, NUMEROINT text, NUMEROEXT text, " +
-				"ENTRECALLE text, YCALLE text, CP text, NOMBREENTREVISTADOR text, CLAVEENTREVISTADOR text, HORAINICIO text, HORATERMINO text, " +
-				"OTRO_CODIGORESULTADO text DEFAULT '0', LATITUD text, LONGITUD text, TIPO text, RESPONSABLEPITA text DEFAULT '0', CORREO text DEFAULT '0'," +
-				"CREATE_BY text, FECHAENTREVISTA TIMESTAMP default (datetime('now', 'localtime')), guardado INTEGER DEFAULT 1, " +
-				"estado INTEGER DEFAULT 0, NUMPREGUNTA TEXT DEFAULT '0')";
+				"CALLE text, NUMEROINT text, NUMEROEXT text, ENTRECALLE text, YCALLE text, CP text, NOMBREENTREVISTADOR text, " +
+				"CLAVEENTREVISTADOR text, HORAINICIO text, HORATERMINO text, OTRO_CODIGORESULTADO text DEFAULT '0', LATITUD text, LONGITUD text, " +
+				"TIPO text, RESPONSABLEPITA text DEFAULT '0', CORREO text DEFAULT '0', CREATE_BY text, " +
+				"FECHAENTREVISTA TIMESTAMP default (datetime('now', 'localtime')), guardado INTEGER DEFAULT 1, estado INTEGER DEFAULT 0, " +
+				"NUMPREGUNTA TEXT DEFAULT '0', NUM_CARRIL_LIGERO text DEFAULT '0', NUM_EQUIPOS_MOVILES text DEFAULT '0', NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0', " +
+				"NUM_CARGA_PEATONAL text DEFAULT '0', NUM_CARRIL_ADMIN text DEFAULT '0', CENTROS_REVISION text DEFAULT '0')";
 		db.execSQL(query);
 
 		// IDCUESTIONARIO = _ID imei fecha de la tabla encuesta
@@ -57,7 +61,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 				" estado INTEGER DEFAULT 0);";
 		db.execSQL(query2);
 
-		String query3 = "CREATE TABLE imagenes("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, imagen text DEFAULT '0', " +
+		String query3 = "CREATE TABLE "+ imagenes +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, imagen text DEFAULT '0', " +
 				"carril text DEFAULT '0', tipo text DEFAULT '0', IDENCUESTA text DEFAULT '0'," +
 				"fecha TIMESTAMP default (datetime('now', 'localtime')), " +
 				"estado INTEGER DEFAULT 0);";
@@ -79,9 +83,12 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		//onCreate(db);
 
 		//if(version_ant == 1 && version_nue == 2){
-		//db.execSQL(SQLUpdateV2);
-		//db.execSQL(SQLUpdateV3);
-		//db.execSQL(SQLUpdateV4);
+		db.execSQL(SQLUpdateV2);
+		db.execSQL(SQLUpdateV3);
+		db.execSQL(SQLUpdateV4);
+		db.execSQL(SQLUpdateV5);
+		db.execSQL(SQLUpdateV6);
+		db.execSQL(SQLUpdateV7);
 		//}
 	}
 
@@ -159,6 +166,18 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
 	}
 
+	public void borrar(String id, String tabla) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		String ide[] = {id};
+		this.getWritableDatabase().delete(tabla,"NUMPREGUNTA>=?", ide);
+	}
+
+	public Cursor borrar(){
+		String columnas[] = {_ID, "pass"};
+		Cursor c = this.getReadableDatabase().query(login, columnas, null, null, null, null, null, "0,3");
+		return c;
+	}
 	public String NUMPREGUNTA(){
 		String result="0";
 		String columnas[] = {"NUMPREGUNTA"};
@@ -168,6 +187,25 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			if ( c.getCount() > 0) {
 				int iu;
 				iu = c.getColumnIndex("NUMPREGUNTA");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}	public String campo(String campo, String tabla){
+		String result="0";
+		String columnas[] = {campo};
+		try{
+			Cursor c = this.getReadableDatabase().query(tabla, columnas,  null, null, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(campo);
 				result = c.getString(iu);
 			}
 		}catch(SQLiteException e){
@@ -191,6 +229,22 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	public Cursor nueve(String id){
 		String columnas[] = {_ID, "NUMPREGUNTA", "RESPUESTA", "FOLIORESPUESTA"};
 		String ide[] = {id, "9"};
+		Cursor c = this.getReadableDatabase().query(respuestas, columnas, "IDCUESTIONARIO=? and NUMPREGUNTA=?", ide, null, null, null, null);
+
+		return c;
+	}
+
+	public Cursor imagenesDetalle(String FOLIOENCUESTA){
+		String columnas[] = {_ID, "estado", "tipo", "carril"};
+		String ide[] = {FOLIOENCUESTA};
+		Cursor c = this.getReadableDatabase().query(imagenes, columnas, "IDENCUESTA=?", ide, null, null, null, null);
+
+		return c;
+	}
+
+	public Cursor conteo(String FOLIOENCUESTA, String pregunta){
+		String columnas[] = {_ID};
+		String ide[] = {FOLIOENCUESTA, pregunta};
 		Cursor c = this.getReadableDatabase().query(respuestas, columnas, "IDCUESTIONARIO=? and NUMPREGUNTA=?", ide, null, null, null, null);
 
 		return c;
@@ -230,6 +284,13 @@ public class Handler_sqlite extends SQLiteOpenHelper {
         }
         return result;
     }
+
+	public void actualizaPregunta(String id, String NUMPREGUNTA ) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put("NUMPREGUNTA", NUMPREGUNTA);
+		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+	}
 
 	public String empresa(){
 		String result="0";
@@ -278,12 +339,6 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		if ( (CAUSA != null) && (!CAUSA.equals("")) ) {
 			this.getWritableDatabase().insert(bitacora, null, valores);
 		}
-	}
-
-	public Cursor borrar(){
-		String columnas[] = {_ID, "pass"};
-		Cursor c = this.getReadableDatabase().query(login, columnas, null, null, null, null, null, "0,3");
-		return c;
 	}
 
 	public String usuario(){
@@ -349,12 +404,6 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
 	}
 
-	public void actualizaPregunta(String id, String NUMPREGUNTA ) {
-		// TODO Auto-generated method stub
-		ContentValues valores = new ContentValues();
-		valores.put("NUMPREGUNTA", NUMPREGUNTA);
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
-	}
 
 	public void actualizaEntidad(String id, String cveedo, String cvemun,  String cveloc, String colonia) {
 		// TODO Auto-generated method stub
@@ -389,7 +438,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 
 	public Cursor revisar(){
-		String columnas[] = {_ID, "FOLIOENCUESTA", "RECINTOADUANAL"};
+		String columnas[] = {_ID, "FOLIOENCUESTA", "RECINTOADUANAL", "estado"};
 		String[] ident= {"0"};
 		Cursor c = this.getReadableDatabase().query(encuesta, columnas, null, null, null, null, null);
 		return c;

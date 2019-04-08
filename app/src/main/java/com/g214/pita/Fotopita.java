@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class Fotopita extends Activity {
     TextView tvNumero, tvFecha, tvPosicion;
     Spinner spDocumento;
     Typeface ligt, regular, medio;
+    ListView lista;
     Boolean bool;
     int numpregunta;
     String [] tipoFoto;
@@ -85,7 +87,9 @@ public class Fotopita extends Activity {
         btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
         spDocumento = (Spinner) findViewById(R.id.spDocumento);
+        lista = (ListView) findViewById(R.id.lvLista);
         spDocumento.setVisibility(View.GONE);
+        lista.setVisibility(View.GONE);
         //tvPosicion.setVisibility(View.GONE);
         tvFecha.setVisibility(View.GONE);
         tvNumero.setVisibility(View.GONE);

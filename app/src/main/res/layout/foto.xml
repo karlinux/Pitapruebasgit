@@ -95,7 +95,7 @@
             android:id="@+id/rbDoc13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:checked="false"
             android:text="Instrumento de supervisión" />
 
@@ -138,6 +138,12 @@
         android:textColor="@color/colortextobotones"
         android:text="Regresar"
         android:textSize="@dimen/textoboton"/>
+        <ListView
+            android:id="@+id/lvLista"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textAlignment="center">
+        </ListView>
 </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

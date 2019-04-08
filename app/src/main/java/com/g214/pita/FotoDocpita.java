@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -28,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -37,6 +39,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by carlos on 30/06/17.
@@ -63,12 +66,20 @@ public class FotoDocpita extends Activity {
     int numpregunta;
     String [] tipoFoto;
     RadioGroup contenedor;
+    private Adaptador adaptador;
     RadioButton opcionI1, opcionI2;
+    ListView lista;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foto);
 
-        tipoFoto = new String[]{"", "Encuesta de percepción", "Instrumento de supervisión", ""};
+        //tipoFoto = new String[]{"", "Encuesta de percepción", "Instrumento de supervisión", ""};
+
+        tipoFoto = new String[]{"", "Video vigilancia", "Vehículos ligeros", "Vehículos de carga", "Infraestructura auxiliar",
+                "Binomio canino", "Carril administrado", "Zona de revisión ", "Control de carga peatonal", "Zona de amarillos de carga",
+                "Zona de revisión de carga", "Centro de monitoreo", "Encuesta de percepción", "Instrumento de supervisión"};
+
 
         tvFecha = (TextView) findViewById(R.id.tvFecha);
         etCarril = (EditText) findViewById(R.id.etCarril);
@@ -78,6 +89,9 @@ public class FotoDocpita extends Activity {
         btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
         spDocumento = (Spinner) findViewById(R.id.spDocumento);
+        lista = (ListView) findViewById(R.id.lvLista);
+
+
         etCarril.setVisibility(View.GONE);
         tvFecha.setVisibility(View.GONE);
         tvNumero.setVisibility(View.GONE);
@@ -134,6 +148,12 @@ public class FotoDocpita extends Activity {
 
         bolsa = getIntent().getExtras();
         FOLIOENCUESTA = bolsa.getString("folio");
+
+        adaptador = new Adaptador(this, GetArrayItems(FOLIOENCUESTA));
+
+        lista.setAdapter(adaptador);
+
+        lista.setClickable(false);
 
         inserta.abrir();
         cuis = inserta.cuis();
@@ -441,5 +461,30 @@ public class FotoDocpita extends Activity {
             }
 
         }
+    }
+
+    private ArrayList<Entidad> GetArrayItems(String folio){
+        ArrayList<Entidad> listItems = new ArrayList<>();
+
+        inserta.abrir();
+        Cursor cur= inserta.imagenesDetalle(folio);
+        while (cur.moveToNext()) {
+            String sincronizado = "";
+            if(cur.getString(1).equals("1")){
+                sincronizado = "SINCRONIZADO";
+            }else{
+                sincronizado = "NO SINCRONIZADO";
+            }
+            listItems.add(
+                    new Entidad(
+                            "", "", ""+
+                            "Imágen \n"+tipoFoto[Integer.parseInt(cur.getString(2))]+
+                    "\n"+sincronizado
+                    )
+            );
+        }
+        cur.close();
+        inserta.close();
+        return listItems;
     }
 }

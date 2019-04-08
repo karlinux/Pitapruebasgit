@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -49,7 +51,7 @@ public class Multipuntopita extends AppCompatActivity {
     TextView tvVersion, tvPregunta, tvEmpresa;
     Button btnGuardar, btnRegresar;
     Spinner spPreguntas, spPreguntas2;
-    String n, pregunta, pregunta1, chk1, chk2, chk3, chk4, chk5, chk6, chk7, chk8, chk9,
+    String n, pregunta, pregunta1, chk1, chk2, chk3, chk4, chk5, chk6, chk7, chk8, chk9, NUM_CARRIL_LIGERO,
             chk10, pregunta2, usuario, id, empresa, imei, FOLIOENCUESTA, dm, otro, FOLIORESPUESTA, error;
     //Intents
     String Foto, Regresar, Pregunta;
@@ -58,7 +60,7 @@ public class Multipuntopita extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter;
     ArrayAdapter<CharSequence> adapter2;
 
-    int num, numCheck;
+    int num, numCheck, conteo;
 
     List<Item> items;
     ListView listView;
@@ -193,10 +195,24 @@ public class Multipuntopita extends AppCompatActivity {
         switch (numpregunta){
 
             case 2: // 2.1 ¿Cuenta con Certificación OEA?
+            case 27:
+            case 28:
+            case 29:
+            case 30:
+            case 31:
+            case 32:
+            case 33:
+            case 34:
+            case 35:
                 lp = (LinearLayout.LayoutParams) tvEmpresa.getLayoutParams();
                 lp.setMargins(10,0,0,20);
                 tvEmpresa.setVisibility(View.VISIBLE);
-                tvEmpresa.setText("2.1. Video vigilancia");
+
+                if(numpregunta>=26) {
+                    tvEmpresa.setText("3.1. Carriles de vehículos ligeros");
+                }else{
+                    tvEmpresa.setText("2.1. Video vigilancia");
+                }
 
                 lp = (LinearLayout.LayoutParams) tvPregunta.getLayoutParams();
                 lp.setMargins(10,0,0,20);
@@ -208,6 +224,13 @@ public class Multipuntopita extends AppCompatActivity {
                 tvVersion.setVisibility(View.GONE);
                 spPreguntas.setVisibility(View.GONE);
 
+            if(numpregunta == 35){
+                inserta.abrir();
+                NUM_CARRIL_LIGERO = inserta.campo("NUM_CARRIL_LIGERO", "encuesta");
+                Cursor contar = inserta.conteo(FOLIOENCUESTA, "27");
+                conteo = contar.getCount();
+                inserta.cerrar();
+            }
 
             break;
             case 3:
@@ -242,7 +265,10 @@ public class Multipuntopita extends AppCompatActivity {
 
                 numCheck=0;
                 tvPregunta.setText(IDPREGUNTAS[numpregunta] + PREGUNTAS[numpregunta]);
+                etOtro.requestFocus();
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 etOtro.setHint("Cuantos ya están instalados");
+
                 if(numpregunta==19){
                     etDos.setHint("Cuantos no están operando, ni en \npruebas o listos para pruebas");
                 }else {
@@ -285,9 +311,10 @@ public class Multipuntopita extends AppCompatActivity {
                 tvPregunta.setText(IDPREGUNTAS[numpregunta] + PREGUNTAS[numpregunta]);
 
 
-
+                etOtro.requestFocus();
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 lp = (LinearLayout.LayoutParams) etOtro.getLayoutParams();
-                lp.setMargins(100,0,100,60);
+                lp.setMargins(100,0,100,50);
                 etOtro.setLayoutParams(lp);
                 etOtro.setGravity(Gravity.CENTER_HORIZONTAL);
                 etOtro.setVisibility(View.VISIBLE);
@@ -295,7 +322,7 @@ public class Multipuntopita extends AppCompatActivity {
                 etOtro.setHint("Cuantas ya están operando");
 
                 lp = (LinearLayout.LayoutParams) etDos.getLayoutParams();
-                lp.setMargins(100,0,100,60);
+                lp.setMargins(100,0,100,50);
                 etDos.setLayoutParams(lp);
                 etDos.setGravity(Gravity.CENTER_HORIZONTAL);
                 etDos.setVisibility(View.VISIBLE);
@@ -303,7 +330,7 @@ public class Multipuntopita extends AppCompatActivity {
                 etDos.setHint("Cuantos están en pruebas \no listas para pruebas");
 
                 lp = (LinearLayout.LayoutParams) etTres.getLayoutParams();
-                lp.setMargins(100,0,100,60);
+                lp.setMargins(100,0,100,50);
                 etTres.setLayoutParams(lp);
                 etTres.setGravity(Gravity.CENTER_HORIZONTAL);
                 etTres.setVisibility(View.VISIBLE);
@@ -410,6 +437,15 @@ public class Multipuntopita extends AppCompatActivity {
 
                 switch (numpregunta){
                     case 2:
+                    case 27:
+                    case 28:
+                    case 29:
+                    case 30:
+                    case 31:
+                    case 32:
+                    case 33:
+                    case 34:
+                    case 35:
                         pregunta1 = chk1+"|"+chk2+"|"+chk3;
                         num = (chk1.equals("0") && chk2.equals("0")  && chk3.equals("0") ? 0 : 1);
                         error = "AL MENOS UNA CASILLA DEBE DE ESTAR SELECCIONADA";
@@ -440,6 +476,7 @@ public class Multipuntopita extends AppCompatActivity {
                     case 10:
                     case 15:
                     case 18:
+                    case 25:
 
                         pregunta1 = etOtro.getText().toString();
                         pregunta2 = etDos.getText().toString();
@@ -451,8 +488,15 @@ public class Multipuntopita extends AppCompatActivity {
                 }
 
                 if(num!=0) {
+
                 inserta.abrir();
                 inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta1, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
+                inserta.cerrar();
+
+                    if(numpregunta == 35 && conteo < Integer.parseInt(NUM_CARRIL_LIGERO)){
+                        numpregunta = 25;
+                    }
+                inserta.abrir();
                 inserta.actualizaPregunta(id, Integer.toString(numpregunta));
                 inserta.cerrar();
 
@@ -556,6 +600,15 @@ public class Multipuntopita extends AppCompatActivity {
 
                     switch (numpregunta) {
                         case 2:
+                        case 27:
+                        case 28:
+                        case 29:
+                        case 30:
+                        case 31:
+                        case 32:
+                        case 33:
+                        case 34:
+                        case 35:
                             if (position == 0)
                                 chk1 = newState && textArray[0].equals("1") ? "1" : "0";
                             if (position == 1)
@@ -586,6 +639,17 @@ public class Multipuntopita extends AppCompatActivity {
         switch (npregunta){
             case 2:
                 arrayText = getResources().obtainTypedArray(R.array.punto2_1_2);
+                break;
+            case 27:
+            case 28:
+            case 29:
+            case 30:
+            case 31:
+            case 32:
+            case 33:
+            case 34:
+            case 35:
+                arrayText = getResources().obtainTypedArray(R.array.punto3_2_1);
                 break;
            default:
                 arrayText = getResources().obtainTypedArray(R.array.p1_8);

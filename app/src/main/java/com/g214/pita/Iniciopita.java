@@ -155,7 +155,7 @@ public class Iniciopita extends AppCompatActivity {
             finish();
         }
 
-        else if (n.equals("5")) {
+        else if (n.equals("5") && !CAMPO.equals("1")) {
 
             Intent intent = new Intent(Siguiente2);
             //Intent intent = new Intent(getApplicationContext(), Preguntapuntopita.class);

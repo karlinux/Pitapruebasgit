@@ -178,7 +178,7 @@ public class Buscarpita extends AppCompatActivity {
     {
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent int1 = new Intent(".MainActivity");
+            Intent int1 = new Intent(this, MainActivity.class);
             startActivity(int1);
             finish();
             return true;

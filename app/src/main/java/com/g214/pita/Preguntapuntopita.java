@@ -41,7 +41,7 @@ public class Preguntapuntopita extends AppCompatActivity {
     Button btnIniciar, btnRegresar;
     Spinner spPregunta, spPregunta2;
     Bundle bolsa;
-    String n, pregunta, selecPregunta, selecPregunta2, pregunta2, usuario, id, empresa, imei, FOLIOENCUESTA, otro, FOLIORESPUESTA;
+    String n, pregunta, selecPregunta, NUM_CARRIL_LIGERO, pregunta2, usuario, id, empresa, imei, FOLIOENCUESTA, otro, FOLIORESPUESTA, campo;
     int numpregunta;
     String [] IDPREGUNTAS, PREGUNTAS;
     //Intents
@@ -60,6 +60,12 @@ public class Preguntapuntopita extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        inserta.abrir();
+        //inserta.actualizaPregunta("1", "23");
+        //inserta.borrar("24","respuestas");
+        //Toast.makeText(this, inserta.campo("NUM_CARRIL_LIGERO", "encuesta"), Toast.LENGTH_SHORT).show();
+        NUM_CARRIL_LIGERO = inserta.campo("NUM_CARRIL_LIGERO", "encuesta");
+        inserta.cerrar();
         PREGUNTAS = getResources().getStringArray(R.array.preguntaspita);
         IDPREGUNTAS = getResources().getStringArray(R.array.numpregunta);
 
@@ -70,6 +76,7 @@ public class Preguntapuntopita extends AppCompatActivity {
         num =0;
         inserta.abrir();
         usuario = inserta.usuario();
+        n = inserta.guardado2();
         numpregunta = Integer.parseInt(inserta.NUMPREGUNTA());
         id = inserta.iden();
         FOLIOENCUESTA = inserta.FOLIOENCUESTA();
@@ -181,7 +188,7 @@ public class Preguntapuntopita extends AppCompatActivity {
 
                     }
 
-                    Toast.makeText(Preguntapuntopita.this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Preguntapuntopita.this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
 
                 }
                 public void onNothingSelected(AdapterView<?> parent) {
@@ -190,13 +197,18 @@ public class Preguntapuntopita extends AppCompatActivity {
 
             break;
             case 23:// 2.1.1
-                tvVersion.setText(" III. Vehículos ligeros");
+            // 2.1.1
+                    tvVersion.setText(" III. Vehículos ligeros");
                 tvVersion.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
                 tvVersion.setTextColor(Color.parseColor("#79032e"));
                 tvEmpresa.setVisibility(View.VISIBLE);
-                tvEmpresa.setText("3.1. Carriles de vehículos ligeros");
-                tvVersion.setVisibility(View.VISIBLE);
-
+                if(numpregunta>35) {
+                    tvEmpresa.setText(" 3.3. Zona de revisión");
+                    tvVersion.setVisibility(View.GONE);
+                }else {
+                    tvEmpresa.setText("3.1. Carriles de vehículos ligeros");
+                    tvVersion.setVisibility(View.VISIBLE);
+                }
                 lp = (LinearLayout.LayoutParams) tvPregunta.getLayoutParams();
                 lp.setMargins(40,20,20,0);
 
@@ -232,9 +244,16 @@ public class Preguntapuntopita extends AppCompatActivity {
             });
 
             break;
+
             case 24:// 2.1.1
+            case 26:// 2.1.1
+            case 36:
                 tvEmpresa.setVisibility(View.VISIBLE);
-                tvEmpresa.setText("3.1. Carriles de vehículos ligeros");
+                if(numpregunta>35) {
+                    tvEmpresa.setText("3.3. Zona de revisión");
+                }else {
+                    tvEmpresa.setText("3.1. Carriles de vehículos ligeros");
+                }
                 tvVersion.setVisibility(View.VISIBLE);
                 spPregunta.setVisibility(View.GONE);
 
@@ -248,9 +267,16 @@ public class Preguntapuntopita extends AppCompatActivity {
                 etOtro.setLayoutParams(lp);
                 etOtro.setGravity(Gravity.CENTER_HORIZONTAL);
                 etOtro.setVisibility(View.VISIBLE);
-                etOtro.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-                etOtro.setHint("Carriles");
+                if(numpregunta==24) {
+                    etOtro.setHint("Carriles");
+                    etOtro.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                }else if(numpregunta==26){
+                    etOtro.setHint("Carril No.");
+                }else if(numpregunta==36){
+                    etOtro.setText("1");
+                    etOtro.setHint("Zonas de revisioin.");
+                }
             break;
 
                 // DESFAULT MANDA A LA ACTIVITY DE FOTO
@@ -279,11 +305,14 @@ public class Preguntapuntopita extends AppCompatActivity {
                 switch (numpregunta){
                     case 1:
                     case 23:
+                    case 36:
                         num = (pregunta.equals("0")? 0 : 1);
                     break;
                     case 24:
+                    case 26:
                         pregunta = otro;
                         otro = "";
+                        campo = "NUM_CARRIL_LIGERO";
                         num = (otro.equals("0")? 0 : 1);
                         break;
                 }
@@ -291,9 +320,16 @@ public class Preguntapuntopita extends AppCompatActivity {
 
 
                 if(num!=0) {
+
                     inserta.abrir();
-                    inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
-                    inserta.actualizaPregunta(id, String.valueOf(numpregunta));
+                    if(numpregunta==24) {
+                        inserta.actualzaRespuesta(id, pregunta, campo, n);
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta));
+                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
+                    }else{
+                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta));
+                    }
                     inserta.cerrar();
 
                     if (numpregunta == 41) {

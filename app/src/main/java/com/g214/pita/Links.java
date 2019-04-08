@@ -16,7 +16,7 @@ public class Links {
     public static String JSON = "http://g214.com.mx/pita/json.php";
 
     //public static String VERSION = "6";
-    public static String VERSION = "5";
+    public static String VERSION = "6";
     public static String CARPETA = "archpita";
     public static String PATH = "com.g214.pita";
 
