@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -39,6 +40,8 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by carlos on 30/06/17.
@@ -62,6 +65,7 @@ public class Fotopita extends Activity {
     Typeface ligt, regular, medio;
     ListView lista;
     Boolean bool;
+    Cursor curPunto;
     int numpregunta;
     String [] tipoFoto;
 
@@ -93,6 +97,7 @@ public class Fotopita extends Activity {
         //tvPosicion.setVisibility(View.GONE);
         tvFecha.setVisibility(View.GONE);
         tvNumero.setVisibility(View.GONE);
+        btnFinalizar.setVisibility(View.GONE);
 
         RadioGroup contenedor = (RadioGroup) findViewById(R.id.rgDoc);
         contenedor.setVisibility(View.GONE);
@@ -143,14 +148,15 @@ public class Fotopita extends Activity {
 
         inserta.abrir();
         cuis = inserta.cuis();
-        FOLIOENCUESTA = inserta.FOLIOENCUESTA();
-        numpregunta = Integer.parseInt(inserta.NUMPREGUNTA());
+        curPunto = inserta.punto();
+        curPunto.moveToLast();
+        FOLIOENCUESTA = curPunto.getString(0);
+
+        numpregunta = Integer.parseInt(inserta.NUMPREGUNTAFOTO(FOLIOENCUESTA));
         inserta.cerrar();
 
-        numpregunta = numpregunta + 1;
-
         tvPosicion.setText(tipoFoto[numpregunta]);
-
+        //Toast.makeText(this, FOLIOENCUESTA, Toast.LENGTH_SHORT).show();
         btnFoto = (ImageButton) findViewById(R.id.btnFoto);
 
         inserta.abrir();
@@ -189,21 +195,35 @@ public class Fotopita extends Activity {
         }
         imeistring = telephonyManager.getDeviceId();
 
+        Date fechaActual = new Date();
+        SimpleDateFormat a = new SimpleDateFormat("yyyy");
+        SimpleDateFormat M = new SimpleDateFormat("MM");
+        SimpleDateFormat d = new SimpleDateFormat("dd");
+        SimpleDateFormat h = new SimpleDateFormat("kk");
+        SimpleDateFormat m = new SimpleDateFormat("mm");
+        SimpleDateFormat s = new SimpleDateFormat("ss");
+
+        String mes = M.format(fechaActual);
+        String ano = a.format(fechaActual);
+        String dia = d.format(fechaActual);
+        String hrs = h.format(fechaActual);
+        String min = m.format(fechaActual);
+        String seg = s.format(fechaActual);
+
         StringBuilder stringFecha2 = new StringBuilder();
 
         stringFecha2.append(imeistring);
-        stringFecha2.append(fecha.substring(0,4));
-        stringFecha2.append(fecha.substring(5,7));
-        stringFecha2.append(fecha.substring(8,10));
-        stringFecha2.append(fecha.substring(11,13));
-        stringFecha2.append(fecha.substring(14,16));
-        stringFecha2.append(fecha.substring(17,19));
+        stringFecha2.append(ano);
+        stringFecha2.append(mes);
+        stringFecha2.append(dia);
+        stringFecha2.append(hrs);
+        stringFecha2.append(min);
+        stringFecha2.append(seg);
         stringFecha2.append(nameFoto);
         stringFecha2.append(".jpg");
 
         nombrefoto = stringFecha2.toString();
 
-        //Toast.makeText(this, nameFoto, Toast.LENGTH_SHORT).show();
         StringBuilder stringFecha = new StringBuilder();
         stringFecha.append(imagen);
         stringFecha.append(imeistring);
@@ -236,17 +256,14 @@ public class Fotopita extends Activity {
             }
 
             btnFoto.setImageBitmap(bmSource);
-            btnFinalizar.setVisibility(View.GONE);
+            btnRegresar.setVisibility(View.GONE);
             btnGuardar.setVisibility(View.VISIBLE);
         }else{
-            btnFinalizar.setVisibility(View.VISIBLE);
+            btnRegresar.setVisibility(View.VISIBLE);
             btnGuardar.setVisibility(View.GONE);
             btnFoto.setImageResource(R.drawable.zc4000);
         }
 
-        if(numpregunta==1){
-            btnRegresar.setVisibility(View.GONE);
-        }
         btnFoto = (ImageButton) findViewById(R.id.btnFoto);
         btnFoto.setOnClickListener(new View.OnClickListener() {
 
@@ -322,41 +339,17 @@ public class Fotopita extends Activity {
             }
         });
 
-        btnFinalizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                if(numpregunta < 11) {
-
-                    inserta.abrir();
-                    inserta.actualizaPregunta(id, Integer.toString(numpregunta));
-                    inserta.cerrar();
-
-                    Intent ins = new Intent(Foto);
-                    startActivity(ins);
-                    finish();
-                }else{
-                    Intent ins = new Intent(Siguiente);
-                    startActivity(ins);
-                    finish();
-                }
-            }
-        });
-
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                numpregunta = numpregunta - 2;
-                //Toast.makeText(Fotopita.this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
-                inserta.abrir();
-                inserta.actualizaPregunta(id, Integer.toString(numpregunta));
-                inserta.cerrar();
 
-                Intent ins = new Intent(Foto);
+                inserta.abrir();
+                inserta.actualizaFoto(FOLIOENCUESTA, "0");
+                inserta.cerrar();
+                Intent ins = new Intent(".Imagenespita");
                 startActivity(ins);
                 finish();
+
             }
         });
 
