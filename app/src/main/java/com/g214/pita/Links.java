@@ -16,13 +16,13 @@ public class Links {
     public static String JSON = "http://g214.com.mx/pita/json.php";
 
     //public static String VERSION = "6";
-    public static String VERSION = "6";
+    public static String VERSION = "7";
     public static String CARPETA = "archpita";
     public static String PATH = "com.g214.pita";
 
     public static String APK = "pita";
 
-    public  static String CAMPO = "2";
+    public  static String CAMPO = "1";
 
     public String getLink(){
        return link;

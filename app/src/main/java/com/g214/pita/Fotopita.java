@@ -286,7 +286,6 @@ public class Fotopita extends Activity {
                 }
             }
         });
-
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,9 +293,7 @@ public class Fotopita extends Activity {
                 File file = new File(foto);
                 bool = file.exists();
                 carril = etCarril.getText().toString();
-
                 String error="";
-
                 if(bool==false){
                     error="CAPTURE LA FOTO";
                 }else{
@@ -320,8 +317,6 @@ public class Fotopita extends Activity {
                         }
                         break;
                 }
-
-
                 if(error.equals("")){
 
                     inserta.abrir();

@@ -91,25 +91,6 @@
     <item>2.1.4. </item>
     <item>2.1.5. </item>
     <item>2.1.6. </item>
-    <item>2.1.7. </item>
-    <item>2.1.8. </item>
-    <item>2.2.1. </item>
-    <item>2.2.2. </item>
-    <item>2.2.3. </item>
-    <item>2.2.4. </item>
-    <item>2.2.5. </item>
-    <item>2.2.6. </item>
-    <item>2.3.4. </item>
-    <item>2.3.2. </item>
-    <item>2.3.3. </item>
-    <item>2.3.1. </item>
-    <item>2.3.5. </item>
-    <item>2.3.6. </item>
-    <item>2.3.7. </item>
-    <item>2.3.8. </item>
-    <item>3.1.1. </item>
-    <item>3.1.2. </item>
-    <item>3.1.3. </item>
     <item>3.2. </item>
     <item>3.2.1. </item>
     <item>3.2.2. </item>
@@ -120,8 +101,24 @@
     <item>3.2.7. </item>
     <item>3.2.8. </item>
     <item>3.2.9. </item>
-    <item>3.3. </item>
     <item>3.3.1. </item>
+    <item>3.3.2. </item>
+    <item>3.4. </item>
+    <item>3.4.1. </item>
+    <item>3.4.2. </item>
+    <item>3.5.1. </item>
+    <item>3.5.2. </item>
+
+    <item>3.6. </item>
+    <item>3.6.1. </item>
+    <item>3.6.2. </item>
+    <item>3.6.3. </item>
+
+    <item>4.1.1. </item>
+    <item>4.1.2. </item>
+    <item>4.2. </item>
+    <item>4.2.1. </item>
+
 
     <item></item>
     </string-array>
@@ -129,55 +126,37 @@
     <string-array name="preguntaspita">
     <item></item>
     <item> Contratación de video vigilancia PITA</item>
-    <item> Estatus de las cámaras convencionales</item>
-    <item> Estatus de los coaxiales</item>
-    <item> Estatus de las canalizaciones (charola, tubería, subterránea, etc.)</item>
-    <item> Estatus de los cables UTP</item>
-    <item> Estatus de las fibras ópticas</item>
-    <item> Estatus de los postes de 6 o 12 metros</item>
-    <item> Estatus de las tierras físicas</item>
-    <item> Estatus de los postes de 25 metros</item>
-    <item>Estatus de las cámaras térmicas</item>
+    <item> Cámaras convencionales</item>
+    <item> Cuenta con Cámaras Térmicas</item>
+    <item> Cámaras térmicas</item>
 
-    <item>Estatus de los registros</item>
-    <item>Estatus de los cables UTP</item>
-    <item>Estatus de las fibras ópticas</item>
-    <item>Estatus de las tierras físicas</item>
-    <item>Estatus de los audífonos</item>
-    <item>Estatus de los teclados</item>
-    <item>Estatus de los mouse</item>
-    <item>Estatus de los monitores</item>
-    <item>Estatus de los CPU</item>
-    <item>Estatus de los cables UTP</item>
-
-    <item>Estatus de las fibras ópticas</item>
-    <item>Estatus de las canalizaciones (charola, tubería, subterránea, etc.)</item>
-    <item>Contratación de obra con recursos PITA para carriles de ligeros</item>
-    <item>Número de carriles ligeros contratados con recursos PITA</item>
-    <item>Estatus de los carriles ligeros contratados con PITA</item>
+    <item>Cuenta con carriles de vehículos ligeros </item>
+    <item>Carriles ligeros</item>
     <item>Carril de vehículos ligeros.</item>
-    <item>Estatus del panel de disponibilidad de carril</item>
-    <item>Estatus del semáforo avance/espere</item>
-    <item>Estatus de la cámara de placa delantera</item>
-    <item>Estatus de la cámara de placa trasera</item>
+    <item>Panel de disponibilidad de carril</item>
+    <item>Semáforo avance/espere</item>
+    <item>Cámara de placa delantera</item>
+    <item>Cámara de placa trasera</item>
+    <item>Cámara de imagen ambiental</item>
+    <item>Cámara de rostros (imagen del conductor)</item>
+    <item>Perfilador</item>
+    <item>Esclusa hidráulica</item>
+    <item>Fotocélula (no obligatorias, fue una mejora)</item>
+    <item>Cuenta con zonas de revisión</item>
+    <item>Zona de revisión</item>
+    <item>Zona de revisión de ligeros no. </item>
+    <item>Kiosco de inspección</item>
+    <item>Pantalla informativa</item>
+    <item>Cuenta con equipos móviles</item>
+    <item>Equipos móviles</item>
+    <item>Equipos móviles</item>
 
-    <item>Estatus de la cámara de imagen ambiental</item>
-    <item>Estatus de la cámara de rostros (imagen del conductor)</item>
-    <item>Estatus del perfilador</item>
-    <item>Estatus de la esclusa hidráulica</item>
-    <item>Estatus de la fotocélula (no obligatorias, fue una mejora)</item>
-    <item>Número de zonas de revisión</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión</item>
-    <item>Estatus del kiosco de inspección</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión</item>
+    <item>Toughpad</item>
+    <item>Cargador</item>
+    <item>Funda</item>
+    <item>Cuenta con carriles de vehículos de carga</item>
+    <item>Vehículos de carga</item>
 
-    <item>Estatus del kiosco de inspección</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión</item>
-    <item>Estatus del kiosco de inspección</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión</item>
     <item>Estatus del kiosco de inspección</item>
     <item>Estatus de la pantalla informativa</item>
     <item>Contratación de equipos móviles PITA</item>

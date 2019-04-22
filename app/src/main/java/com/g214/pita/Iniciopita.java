@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,7 +43,7 @@ import org.apache.http.util.EntityUtils;
 public class Iniciopita extends AppCompatActivity {
 
     private final Handler_sqlite inserta = new Handler_sqlite(this);
-    private final Handler_sqliteU insertaU = new Handler_sqliteU(this);
+    private final Handler_sqlite_puntos insertaU = new Handler_sqlite_puntos(this);
     private final Links l = new Links();
     String fecha = l.getFecha();
     String li = l.getLink();
@@ -55,6 +56,7 @@ public class Iniciopita extends AppCompatActivity {
     Bundle bolsa;
     String n, inclu, Universos, textin, imeistring, usuario, dm, Sincroniza, Siguiente, Siguiente1, Siguiente2;
     int num, inicio;
+    Boolean puntos = false;
     Typeface ligt, regular, medio;
 
     @Override
@@ -114,8 +116,11 @@ public class Iniciopita extends AppCompatActivity {
         insertaU.abrir();
         Cursor cur = insertaU.cursor();
         num = cur.getCount();
+        //puntos = insertaU.cursorPita();
+        //int prueba = insertaU.prueba();
         insertaU.cerrar();
 
+        //Log.d("PUNTOS", String.valueOf(prueba));
         if(num<1){
             Intent intent = new Intent(Universos);
             startActivity(intent);
@@ -123,14 +128,16 @@ public class Iniciopita extends AppCompatActivity {
         }
 
         inserta.abrir();
-        n = inserta.guardado2();
+        n = Integer.toString(inserta.punto().getCount()); // Menu pita
+        //n = inserta.guardado2(); // Guardado
+
         inserta.cerrar();
 
         //todo Toast.makeText(this, n, Toast.LENGTH_SHORT).show();
 
         if (n.equals("1")) {
 
-            Intent intPrin = new Intent(getApplicationContext(), Domiciliopita.class);
+            Intent intPrin = new Intent(getApplicationContext(), Menupita.class);
             startActivity(intPrin);
             finish();
 
@@ -444,6 +451,5 @@ public class Iniciopita extends AppCompatActivity {
         dialog.show();
 
     }
-
 }
 

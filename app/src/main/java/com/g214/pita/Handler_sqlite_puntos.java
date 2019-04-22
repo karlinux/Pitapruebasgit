@@ -19,15 +19,19 @@ public class Handler_sqlite_puntos extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
-		
-		String query = "CREATE TABLE puntos(_ID INTEGER PRIMARY KEY AUTOINCREMENT, C_ENTIDAD INTEGER, C_MUNICIPIO INTEGER, " +
-				"NOM_MUNICIPIO text);";
+
+
+		String query = "CREATE TABLE registro(_ID INTEGER PRIMARY KEY AUTOINCREMENT, IDPUNTOTACTICO TEXT, PUNTOTACTICO TEXT, ADUANA TEXT, CVE_ENT TEXT, " +
+				"ENTIDAD TEXT, CVE_MUN text, MUNICIPIO TEXT, CVE_LOC TEXT, LOCALIDAD TEXT, DIRECCION TEXT, CP TEXT);";
 		db.execSQL(query);
 
 		String query2 = "CREATE TABLE localidad(_ID INTEGER PRIMARY KEY AUTOINCREMENT, C_ENTIDAD INTEGER, C_MUNICIPIO INTEGER, " +
 				"C_LOCALIDAD INTEGER, NOM_LOCALIDAD text);";
 		db.execSQL(query2);
 
+		String query3 = "CREATE TABLE municipios(_ID INTEGER PRIMARY KEY AUTOINCREMENT, C_ENTIDAD INTEGER, C_MUNICIPIO INTEGER, " +
+				"NOM_MUNICIPIO text);";
+		db.execSQL(query3);
 	}
 
 
@@ -41,7 +45,7 @@ public class Handler_sqlite_puntos extends SQLiteOpenHelper {
 	}
 
 	public Cursor buscarnombre(String PUNTOTACTICO){
-		String columnas[] = {"_ID", "PUNTOTACTICO"};
+		String columnas[] = {"_ID", "IDPUNTOTACTICO", "PUNTOTACTICO", "ADUANA", "CVE_ENT", "ENTIDAD"};
 		String bus = "PUNTOTACTICO like ?";
 		String columnas2[] = {PUNTOTACTICO};
 		Cursor c = this.getReadableDatabase().query("registro", columnas, bus, columnas2, null, null, null, "0,30");
@@ -50,8 +54,15 @@ public class Handler_sqlite_puntos extends SQLiteOpenHelper {
 	}
 
 	public Cursor cursor(){
-		String columnas[] = {_ID, "C_MUNICIPIO", "NOM_MUNICIPIO"};
-		Cursor c = this.getReadableDatabase().query("municipios", columnas, null, null, null, null, null);
+		String columnas[] = {_ID, "IDPUNTOTACTICO", "PUNTOTACTICO"};
+		Cursor c = this.getReadableDatabase().query("registro", columnas, null, null, null, null, null);
+		return c;
+	}
+
+	public Cursor punto(String IDPUNTOTACTICO){
+		String columnas[] = {"PUNTOTACTICO"};
+		String[] ident= {IDPUNTOTACTICO};
+		Cursor c = this.getReadableDatabase().query("registro", columnas,  "IDPUNTOTACTICO=?", ident, null, null, null);
 		return c;
 	}
 
@@ -59,6 +70,13 @@ public class Handler_sqlite_puntos extends SQLiteOpenHelper {
 		String columnas[] = {_ID, "C_MUNICIPIO", "NOM_MUNICIPIO"};
 		String[] ident= {C_ENTIDAD};
 		Cursor c = this.getReadableDatabase().query("municipios", columnas, "C_ENTIDAD=?", ident, null, null, null, null);
+		return c;
+	}
+
+	public Cursor carriles(String IDPUNTO, String TIPO_CARRIL){
+		String columnas[] = {"NOMBRE_CARRIL"};
+		String[] ident= {IDPUNTO, TIPO_CARRIL};
+		Cursor c = this.getReadableDatabase().query("PUNTOS", columnas, "IDPUNTO=? and TIPO_CARRIL=?", ident, null, null, null, "0,30");
 		return c;
 	}
 
@@ -81,7 +99,6 @@ public class Handler_sqlite_puntos extends SQLiteOpenHelper {
 		Cursor c = this.getReadableDatabase().query("localidad", columnas, "C_ENTIDAD=? and C_MUNICIPIO=?", ident, null, null, null, "0,30");
 		return c;
 	}
-
 	public String iden(){
 		String result="0";
 		String columnas[] = {_ID};

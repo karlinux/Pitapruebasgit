@@ -645,7 +645,7 @@ public class Preguntapita extends AppCompatActivity {
                     if(numpregunta==9 && pregunta.equals("1")) {
                         //Toast.makeText(Preguntapita.this, "ENTRA", Toast.LENGTH_SHORT).show();
                     }else{
-                        inserta.actualizaPregunta(id, Integer.toString(numpregunta));
+                        inserta.actualizaPregunta(id, Integer.toString(numpregunta), "UNO");
 
                     }
                     inserta.cerrar();

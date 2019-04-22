@@ -93,7 +93,7 @@ public class Revisarpita extends AppCompatActivity {
         Cursor cur= inserta.revisar();
         while (cur.moveToNext()) {
             String sincronizado = "";
-            if(cur.getString(1).equals("1")){
+            if(cur.getString(3).equals("1")){
                 sincronizado = "SINCRONIZADO";
             }else{
                 sincronizado = "NO SINCRONIZADO";

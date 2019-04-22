@@ -66,7 +66,7 @@ public class Domiciliopita extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        Regresar = ".Inicio"+ APK;
+        Regresar = ".Menu"+ APK;
         inserta.abrir();
         usuario = inserta.usuario();
         idusuario = inserta.idusuario();
@@ -172,7 +172,6 @@ public class Domiciliopita extends AppCompatActivity {
 
             }
         });
-
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +180,6 @@ public class Domiciliopita extends AppCompatActivity {
                 finish();
             }
         });
-
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

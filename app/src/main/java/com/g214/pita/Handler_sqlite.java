@@ -11,54 +11,61 @@ import static android.provider.BaseColumns._ID;
 
 public class Handler_sqlite extends SQLiteOpenHelper {
 
-
-
 	private String encuesta = "encuesta";
+	private String puntos = "PUNTOS";
 	private String respuestas = "respuestas";
 	private String bitacora = "BITACORA";
 	private String login = "login";
 	private String imagenes = "imagenes";
 
-	private String SQLUpdateV2 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_LIGERO text DEFAULT '0'";
-	private String SQLUpdateV3 = "ALTER TABLE encuesta ADD COLUMN NUM_EQUIPOS_MOVILES text DEFAULT '0'";
-	private String SQLUpdateV4 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0'";
-	private String SQLUpdateV5 = "ALTER TABLE encuesta ADD COLUMN NUM_CARGA_PEATONAL text DEFAULT '0'";
-	private String SQLUpdateV6 = "ALTER TABLE encuesta ADD COLUMN NUM_CARRIL_ADMIN text DEFAULT '0'";
-	private String SQLUpdateV7 = "ALTER TABLE encuesta ADD COLUMN CENTROS_REVISION text DEFAULT '0'";
+	private String SQLUpdateV2 = "ALTER TABLE "+encuesta+" ADD COLUMN NUM_CARRIL_LIGERO text DEFAULT '0'";
+	private String SQLUpdateV3 = "ALTER TABLE "+encuesta+" ADD COLUMN NUM_EQUIPOS_MOVILES text DEFAULT '0'";
+	private String SQLUpdateV4 = "ALTER TABLE "+encuesta+" ADD COLUMN NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0'";
+	private String SQLUpdateV5 = "ALTER TABLE "+encuesta+" ADD COLUMN NUM_CARGA_PEATONAL text DEFAULT '0'";
+	private String SQLUpdateV6 = "ALTER TABLE "+encuesta+" ADD COLUMN NUM_CARRIL_ADMIN text DEFAULT '0'";
+	private String SQLUpdateV7 = "ALTER TABLE "+encuesta+" ADD COLUMN CENTROS_REVISION text DEFAULT '0'";
+	private String SQLUpdateV8 = "ALTER TABLE "+respuestas+" ADD COLUMN VISITA text DEFAULT '1'";
+	private String SQLUpdateV9 = "ALTER TABLE "+login+" ADD COLUMN VISITA text DEFAULT '1'";
+	private String SQLUpdateV10 = "ALTER TABLE "+encuesta+" ADD COLUMN UNO text DEFAULT '0'";
+	private String SQLUpdateV11 = "ALTER TABLE "+encuesta+" ADD COLUMN DOS text DEFAULT '4'";
+	private String SQLUpdateV12 = "ALTER TABLE "+encuesta+" ADD COLUMN TRES text DEFAULT '0'";
+	private String SQLUpdateV13 = "ALTER TABLE "+encuesta+" ADD COLUMN CUATRO text DEFAULT '0'";
+	private String SQLUpdateV14 = "ALTER TABLE "+encuesta+" ADD COLUMN CINCO text DEFAULT '0'";
 
 
 	String query5 = "CREATE TABLE "+bitacora+"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-			" fecha TIMESTAMP default (datetime('now', 'localtime')), fechabitacora DATE, CAUSA TEXT, FOLIO TEXT , IDBITACORA," +
+			" fecha TIMESTAMP default (datetime('now', 'localtime')), fechabitacora DATE, CAUSA TEXT, FOLIO TEXT, IDBITACORA TEXT," +
 			" estado INTEGER DEFAULT 0);";
+
+	String query6 = "CREATE TABLE "+puntos+"("+_ID+" INTEGER, IDPUNTO TEXT, PUNTO TEXT, NOMBRE_CARRIL TEXT, TIPO_CARRIL TEXT);";
 
 	public Handler_sqlite(Context ctx) {
 
-		super(ctx, "mibase", null, 2);
+		super(ctx, "mibase", null, 3);
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
-			// FOLIOENCUESTA = _ID imei fecha de la tabla encuesta
 		String query = "CREATE TABLE "+ encuesta +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, FOLIOENCUESTA text, IDCUESTIONARIO text, " +
 				"CODIGORESULTADO text DEFAULT '0', CVEENT text, CVEMUN text, CVELOC text, COLONIA text, RECINTOADUANAL text, EMPRESA text, " +
 				"CALLE text, NUMEROINT text, NUMEROEXT text, ENTRECALLE text, YCALLE text, CP text, NOMBREENTREVISTADOR text, " +
 				"CLAVEENTREVISTADOR text, HORAINICIO text, HORATERMINO text, OTRO_CODIGORESULTADO text DEFAULT '0', LATITUD text, LONGITUD text, " +
 				"TIPO text, RESPONSABLEPITA text DEFAULT '0', CORREO text DEFAULT '0', CREATE_BY text, " +
 				"FECHAENTREVISTA TIMESTAMP default (datetime('now', 'localtime')), guardado INTEGER DEFAULT 1, estado INTEGER DEFAULT 0, " +
-				"NUMPREGUNTA TEXT DEFAULT '0', NUM_CARRIL_LIGERO text DEFAULT '0', NUM_EQUIPOS_MOVILES text DEFAULT '0', NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0', " +
-				"NUM_CARGA_PEATONAL text DEFAULT '0', NUM_CARRIL_ADMIN text DEFAULT '0', CENTROS_REVISION text DEFAULT '0')";
+				"NUMPREGUNTA TEXT DEFAULT '0', NUM_CARRIL_LIGERO text DEFAULT '0', NUM_EQUIPOS_MOVILES text DEFAULT '0', " +
+				"NUM_CARRIL_VEHICULO_CARGA text DEFAULT '0', NUM_CARGA_PEATONAL text DEFAULT '0', NUM_CARRIL_ADMIN text DEFAULT '0', " +
+				"CENTROS_REVISION text DEFAULT '0', UNO text DEFAULT '0', DOS text DEFAULT '4', TRES text DEFAULT '0', CUATRO text DEFAULT '0')";
 		db.execSQL(query);
 
-		// IDCUESTIONARIO = _ID imei fecha de la tabla encuesta
 		String query4 = "CREATE TABLE "+ respuestas +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, IDCUESTIONARIO text,  " +
 				"SECCION text, PREGUNTA text, RESPUESTA text, RESPUESTA_ADICIONAL text, OTRO text, CREATE_BY text, " +
-				"guardado INTEGER DEFAULT 1, estado INTEGER DEFAULT 0, NUMPREGUNTA TEXT DEFAULT '0', FOLIORESPUESTA TEXT)";
+				"guardado INTEGER DEFAULT 1, estado INTEGER DEFAULT 0, NUMPREGUNTA TEXT DEFAULT '0', FOLIORESPUESTA TEXT, VISITA text DEFAULT '1')";
 		db.execSQL(query4);
 
 		String query2 = "CREATE TABLE "+ login +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				"usuario text, idUsuario text, pass text, nombre text, paterno, materno text, fecha TIMESTAMP default (datetime('now', 'localtime')), " +
-				" estado INTEGER DEFAULT 0);";
+				" estado INTEGER DEFAULT 0, VISITA text DEFAULT '1');";
 		db.execSQL(query2);
 
 		String query3 = "CREATE TABLE "+ imagenes +"("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, imagen text DEFAULT '0', " +
@@ -68,6 +75,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		db.execSQL(query3);
 
 		db.execSQL(query5);
+		db.execSQL(query6);
 
 	}
 
@@ -82,14 +90,29 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		//db.execSQL(SQLUpdateV2);
 		//onCreate(db);
 
-		//if(version_ant == 1 && version_nue == 2){
-		db.execSQL(SQLUpdateV2);
-		db.execSQL(SQLUpdateV3);
-		db.execSQL(SQLUpdateV4);
-		db.execSQL(SQLUpdateV5);
-		db.execSQL(SQLUpdateV6);
-		db.execSQL(SQLUpdateV7);
-		//}
+		if(version_ant == 1 && version_nue == 3){
+			db.execSQL(SQLUpdateV2);
+			db.execSQL(SQLUpdateV3);
+			db.execSQL(SQLUpdateV4);
+			db.execSQL(SQLUpdateV5);
+			db.execSQL(SQLUpdateV6);
+			db.execSQL(SQLUpdateV7);
+			db.execSQL(SQLUpdateV8);
+			db.execSQL(SQLUpdateV9);
+			db.execSQL(SQLUpdateV10);
+			db.execSQL(SQLUpdateV11);
+			db.execSQL(SQLUpdateV12);
+			db.execSQL(SQLUpdateV13);
+			db.execSQL(SQLUpdateV14);
+		}else if(version_ant == 2 && version_nue == 3){
+			db.execSQL(SQLUpdateV8);
+			db.execSQL(SQLUpdateV9);
+			db.execSQL(SQLUpdateV10);
+			db.execSQL(SQLUpdateV11);
+			db.execSQL(SQLUpdateV12);
+			db.execSQL(SQLUpdateV14);
+		}
+		db.execSQL(query6);
 	}
 
 	public void insertarMenu()
@@ -103,13 +126,27 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	public void insertarReg(String RAZONSOCIAL, String CREATE_BY, String TIPO)
 	{
 		ContentValues valores = new ContentValues();
-		valores.put("RECINTOADUANAL", RAZONSOCIAL);
+		valores.put("FOLIOENCUESTA", RAZONSOCIAL);
+		valores.put("DOS", "4");
+		valores.put("TRES", "27");
 		valores.put("CREATE_BY", CREATE_BY);
 		valores.put("TIPO", TIPO);
 
 
 		if ( (RAZONSOCIAL != null) && (!RAZONSOCIAL.equals("")) ) {
 			this.getWritableDatabase().insert(encuesta, null, valores);
+		}
+	}
+
+	public void insertarPunto(String IDPUNTO)
+	{
+		ContentValues valores = new ContentValues();
+		valores.put("IDBITACORA", IDPUNTO);
+		valores.put("estado", "1");
+		valores.put("FOLIO", "0");
+
+		if ( (IDPUNTO != null) && (!IDPUNTO.equals("")) ) {
+			this.getWritableDatabase().insert(bitacora, null, valores);
 		}
 	}
 
@@ -180,13 +217,13 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	}
 	public String NUMPREGUNTA(){
 		String result="0";
-		String columnas[] = {"NUMPREGUNTA"};
+		String columnas[] = {"FOLIO"};
 		try{
-			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  null, null, null, null, null);
+			Cursor c = this.getReadableDatabase().query(bitacora, columnas,  null, null, null, null, null);
 			c.moveToLast();
 			if ( c.getCount() > 0) {
 				int iu;
-				iu = c.getColumnIndex("NUMPREGUNTA");
+				iu = c.getColumnIndex("FOLIO");
 				result = c.getString(iu);
 			}
 		}catch(SQLiteException e){
@@ -197,7 +234,40 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		}
 		return result;
-	}	public String campo(String campo, String tabla){
+	}
+
+	public Cursor puntoTactico(String punto){
+		String result="0";
+		String columnas[] = {"FOLIOENCUESTA"};
+		String ides[] = {punto};
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ides, null, null, null);
+			c.moveToLast();
+		return c;
+	}
+
+	public String numeroPregunta(String campo, String numero){
+		String result="0";
+		String columnas[] = {"RESPUESTA"};
+		String ide[] = {numero};
+		try{
+			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  campo+"=?", ide, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex("RESPUESTA");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
+	public String campo(String campo, String tabla){
 		String result="0";
 		String columnas[] = {campo};
 		try{
@@ -263,6 +333,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		this.getWritableDatabase().update(respuestas, valores, _ID+"=?", new String[] {id});
 
 	}
+
     public String NUMPREGUNTA(String id){
         String result="0";
         String columnas[] = {"NUMPREGUNTA"};
@@ -280,16 +351,66 @@ public class Handler_sqlite extends SQLiteOpenHelper {
             {
                 result="0";
             }
+        }
+        return result;
+    }
+
+    public String NUMPREGUNTAFOTO(String FOLIOENCUESTA){
+        String result="0";
+        String columnas[] = {"NUMPREGUNTA"};
+        String ids [] ={FOLIOENCUESTA};
+        try{
+            Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ids, null, null, null);
+            c.moveToLast();
+            if ( c.getCount() > 0) {
+                int iu;
+                iu = c.getColumnIndex("NUMPREGUNTA");
+                result = c.getString(iu);
+            }
+        }catch(SQLiteException e){
+            System.err.println("Exception @ rawQuery: " + e.getMessage());
+            {
+                result="0";
+            }
 
         }
         return result;
     }
 
-	public void actualizaPregunta(String id, String NUMPREGUNTA ) {
+	public String NUMPREGUNTA(String FOLIOENCUESTA, String SECCION){
+		String result="0";
+		String columnas[] = {SECCION};
+		String ids [] ={FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ids, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(SECCION);
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
+	public void actualizaPregunta(String FOLIOENCUESTA, String NUMPREGUNTA, String seccion) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put(seccion, NUMPREGUNTA);
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
+	}
+
+	public void actualizaFoto(String id, String NUMPREGUNTA ) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("NUMPREGUNTA", NUMPREGUNTA);
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {id});
 	}
 
 	public String empresa(){
@@ -474,6 +595,15 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
 	}
 
+	public void actualizaPita() {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		String [] ident = {"1"};
+		valores.put("estado", "0");
+
+		this.getWritableDatabase().update(bitacora, valores, "estado=?", ident);
+	}
+
 	public void actualizaGuardado(String cuis, String guardado) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
@@ -529,30 +659,11 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return c;
 	}
 
-	public String[] envio(String ide){
-		String columnas[] = {_ID, "nombre", "paterno", "materno", "fecha", "fechanac", "imei", "latitud", "longitud",
-				"entidadnac", "curp", "rfc", "sexo", "calle", "numext", "numint", "edocivil",
-				"colonia", "municipio", "ciudad", "entidad", "cp", "pais"};
-
-		String[] ident= {ide};
-		Cursor c = this.getReadableDatabase().query(encuesta, columnas, "estado=?", ident, null, null, null, "0,30");
-		int num = c.getCount();
-		String result[]= new String[num];
-
-
-		int contador = 0;
-		for (c.moveToFirst();!c.isAfterLast();c.moveToNext() ){
-
-			result[contador] =
-					c.getString(0)+ "---" +c.getString(1)+ "---" +c.getString(2)+ "---" +c.getString(3) + "---" +
-					c.getString(4)+ "---" + c.getString(5)+ "---" + c.getString(6)+ "---" + c.getString(7) + "---" +
-					c.getString(8)+ "---" + c.getString(9)+ "---" + c.getString(10)+ "---" + c.getString(11) + "---" +
-					c.getString(12)+ "---" + c.getString(13)+ "---" + c.getString(14)+ "---" + c.getString(15) + "---" +
-					c.getString(16)+ "---" + c.getString(17)+ "---" + c.getString(18)+ "---" + c.getString(19) + "---" +
-					c.getString(20)+ "---" + c.getString(21)+ "---" + c.getString(22);
-			contador++;
-		}
-		return result;
+	public Cursor punto(){
+		String columnas[] = {"IDBITACORA"};
+		String[] ident= {"1"};
+		Cursor c = this.getReadableDatabase().query(bitacora, columnas,  "estado=?", ident, null, null, null);
+		return c;
 	}
 
 	public void salir(String id) {
@@ -578,6 +689,28 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			if ( c.getCount() > 0) {
 				int iu;
 				iu = c.getColumnIndex("pass");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="";
+			}
+
+		}
+		return result;
+	}
+
+	public String maxnumero(String FOLIOENCUESTA){
+		String result="";
+		String columnas[] = {"MAX(CAST(NUMPREGUNTA as NUMBER)) maximo"};
+		String ident[] = {FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  "IDCUESTIONARIO=?", ident, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex("maximo");
 				result = c.getString(iu);
 			}
 		}catch(SQLiteException e){

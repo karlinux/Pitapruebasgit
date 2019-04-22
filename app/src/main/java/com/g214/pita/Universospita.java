@@ -57,12 +57,11 @@ public class Universospita extends AppCompatActivity {
         tvFecha.setText(fecha);
         tvVersion.setText("Versión " + VERSION + ".0");
 
-        /*ligt = Typeface.createFromAsset(getAssets(), "fonts/montserratLight.otf");
+        ligt = Typeface.createFromAsset(getAssets(), "fonts/montserratLight.otf");
         regular=Typeface.createFromAsset(getAssets(), "fonts/montserratRegular.otf");
         medio=Typeface.createFromAsset(getAssets(), "fonts/montserratMedium.otf");
         tvFecha.setTypeface(regular);
         tvVersion.setTypeface(ligt);
-        */
 
         btnRegresar = (Button)findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +94,12 @@ public class Universospita extends AppCompatActivity {
             try {
 
                 //indico URL al archivo
-                String DownloadUrl= li + "universo.php";
+                String DownloadUrl= li + "universopunto.php";
 
-                String fileName="universo";
+                String fileName="puntos";
 
                 URL url = new URL(DownloadUrl);
-                File file= new File(dir,"universo");
+                File file= new File(dir,"puntos");
 
                 long startTime = System.currentTimeMillis();
 

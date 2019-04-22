@@ -41,8 +41,8 @@ public class Preguntapuntopita extends AppCompatActivity {
     Button btnIniciar, btnRegresar;
     Spinner spPregunta, spPregunta2;
     Bundle bolsa;
-    String n, pregunta, selecPregunta, NUM_CARRIL_LIGERO, pregunta2, usuario, id, empresa, imei, FOLIOENCUESTA, otro, FOLIORESPUESTA, campo;
-    int numpregunta;
+    String n, pregunta, selecPregunta, NUM_CARRIL_LIGERO, pregunta2, usuario, id, empresa, imei, FOLIOENCUESTA, otro, FOLIORESPUESTA, campo, seccion;
+    int numpregunta, cuestionario;
     String [] IDPREGUNTAS, PREGUNTAS;
     //Intents
     String Foto, Pregunta, Multi, Inicio;
@@ -50,7 +50,7 @@ public class Preguntapuntopita extends AppCompatActivity {
     int num;
     InputFilter[] FilterArray;
     LinearLayout.LayoutParams lp;
-
+// 4.7 y 4.8
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,26 +66,46 @@ public class Preguntapuntopita extends AppCompatActivity {
         //Toast.makeText(this, inserta.campo("NUM_CARRIL_LIGERO", "encuesta"), Toast.LENGTH_SHORT).show();
         NUM_CARRIL_LIGERO = inserta.campo("NUM_CARRIL_LIGERO", "encuesta");
         inserta.cerrar();
+
+        inserta.abrir();
+        usuario = inserta.usuario();
+        n = inserta.guardado2();
+        numpregunta = 0;
+        id = inserta.iden();
+        FOLIOENCUESTA = inserta.FOLIOENCUESTA();
+        empresa = inserta.empresa();
+        fecha = inserta.fecha("encuesta", "FECHAENTREVISTA", FOLIOENCUESTA);
+        //inserta.actualizaPregunta(id, "8");
+        inserta.cerrar();
+
         PREGUNTAS = getResources().getStringArray(R.array.preguntaspita);
         IDPREGUNTAS = getResources().getStringArray(R.array.numpregunta);
 
         Foto = ".Foto" + APK;
+
         Inicio = ".Inicio"+ APK;
         Pregunta = ".Preguntapunto" + APK;
         Multi = ".Multipunto" + APK;
         num =0;
+        bolsa = getIntent().getExtras();
+        cuestionario = Integer.parseInt(bolsa.getString("numpregunta"));
+
         inserta.abrir();
-        usuario = inserta.usuario();
-        n = inserta.guardado2();
-        numpregunta = Integer.parseInt(inserta.NUMPREGUNTA());
-        id = inserta.iden();
-        FOLIOENCUESTA = inserta.FOLIOENCUESTA();
-        empresa = inserta.empresa();
-        fecha = inserta.fecha("encuesta", "FECHAENTREVISTA");
-        //inserta.actualizaPregunta(id, "8");
+
+        switch (cuestionario){
+            case 0:
+                seccion = "UNO";
+                numpregunta = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
+               break;
+            case 22:
+                seccion = "DOS";
+                numpregunta = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
+                numpregunta = numpregunta + cuestionario;
+                break;
+        }
         inserta.cerrar();
-        //Toast.makeText(getApplicationContext(), Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
-        numpregunta ++;
+
+        numpregunta++;
 
         TelephonyManager telephonyManager;
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -104,8 +124,7 @@ public class Preguntapuntopita extends AppCompatActivity {
         stringFolioRespuesta.append(fecha.substring(11,13));
         stringFolioRespuesta.append(fecha.substring(14,16));
         stringFolioRespuesta.append(fecha.substring(17,19));
-        stringFolioRespuesta.append(String.format("%02d",numpregunta));
-        stringFolioRespuesta.append(id);
+        stringFolioRespuesta.append(String.format("%03d",numpregunta));
 
         FOLIORESPUESTA = stringFolioRespuesta.toString();
 
@@ -153,49 +172,6 @@ public class Preguntapuntopita extends AppCompatActivity {
 
         switch (numpregunta){
 
-            case 1:// 2.1.1
-                tvVersion.setText(" II. Video vigilancia (sólo si tiene contrato PITA)");
-                tvVersion.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-                tvVersion.setTextColor(Color.parseColor("#79032e"));
-                tvEmpresa.setVisibility(View.VISIBLE);
-                tvEmpresa.setText("2.1. Video vigilancia");
-                tvVersion.setVisibility(View.VISIBLE);
-
-                lp = (LinearLayout.LayoutParams) tvPregunta.getLayoutParams();
-                lp.setMargins(40,20,20,0);
-
-            tvPregunta.setText(IDPREGUNTAS[numpregunta] + PREGUNTAS[numpregunta]);
-            etOtro.setHint("Otro");
-            spPregunta.setAdapter(ArrayAdapter.createFromResource(this, R.array.p1_1, R.layout.spinner_item));
-            spPregunta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                public void onItemSelected(AdapterView<?> parent, View view,
-                                           int pos, long id) {
-                    selecPregunta = String.valueOf(spPregunta.getSelectedItem());
-                    String [] arrayPregunta = selecPregunta.split("-");
-
-                    pregunta = arrayPregunta[0];
-
-                    if(pregunta.equals("2")){
-
-                        numpregunta = 22;
-
-                    }else{
-
-                        inserta.abrir();
-                        numpregunta = Integer.parseInt(inserta.NUMPREGUNTA());
-                        numpregunta++;
-                        inserta.cerrar();
-
-                    }
-
-                    //Toast.makeText(Preguntapuntopita.this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
-
-                }
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-
-            break;
             case 23:// 2.1.1
             // 2.1.1
                     tvVersion.setText(" III. Vehículos ligeros");
@@ -281,7 +257,11 @@ public class Preguntapuntopita extends AppCompatActivity {
 
                 // DESFAULT MANDA A LA ACTIVITY DE FOTO
             default:
-                intent = new Intent(Multi);
+
+                bolsa = new Bundle();
+                bolsa.putString("numpregunta", String.valueOf(cuestionario));
+                Intent intent = new Intent(Multi);
+                intent.putExtras(bolsa);
                 startActivity(intent);
                 finish();
             break;
@@ -324,11 +304,11 @@ public class Preguntapuntopita extends AppCompatActivity {
                     inserta.abrir();
                     if(numpregunta==24) {
                         inserta.actualzaRespuesta(id, pregunta, campo, n);
-                        inserta.actualizaPregunta(id, String.valueOf(numpregunta));
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO");
                         inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
                     }else{
                         inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
-                        inserta.actualizaPregunta(id, String.valueOf(numpregunta));
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO");
                     }
                     inserta.cerrar();
 

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class Buscarpita extends AppCompatActivity {
 
     private final Handler_sqlite inserta = new Handler_sqlite(this);
-    private final Handler_sqliteU insertaC = new Handler_sqliteU(this);
+    private final Handler_sqlite_puntos insertaC = new Handler_sqlite_puntos(this);
     private final Links l = new Links();
 
     String li = l.getLinkSinc();
@@ -47,6 +47,7 @@ public class Buscarpita extends AppCompatActivity {
     Bundle cuices, nombre;
     String[] fecha;
     ArrayList<String> nameList;
+    Cursor puntoTac;
 
 
     @Override
@@ -132,10 +133,10 @@ public class Buscarpita extends AppCompatActivity {
 
 
         insertaC.abrir();
-        Cursor cur= insertaC.buscarnombre(nombre+"%");
+        Cursor cur= insertaC.buscarnombre("%"+nombre+"%");
         while (cur.moveToNext()) {
 
-            nameList.add(cur.getString(0)+"-\n"+cur.getString(1)+" "+cur.getString(2)+" "+cur.getString(3));
+            nameList.add(cur.getString(1)+"-\n"+cur.getString(2)+" "+cur.getString(3)+" "+cur.getString(4));
         }
         cur.close();
         insertaC.close();
@@ -158,12 +159,16 @@ public class Buscarpita extends AppCompatActivity {
 
                 String person = persona[0];
 
-                Bundle tel = new Bundle();
+                inserta.abrir();
+                inserta.insertarPunto(person);
+                puntoTac = inserta.puntoTactico(person);
 
-                tel.putString("id", person);
-                Intent intent = new Intent(".TestFutronic");
-                intent.putExtras(tel);
+                if(puntoTac.getCount()<1){
+                    inserta.insertarReg(person, imeistring, "1");
+                }
+                inserta.cerrar();
 
+                Intent intent = new Intent(".Menupita");
                 startActivity(intent);
                 finish();
 

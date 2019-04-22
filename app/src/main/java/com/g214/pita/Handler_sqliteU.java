@@ -60,6 +60,29 @@ public class Handler_sqliteU extends SQLiteOpenHelper {
 		return c;
 	}
 
+	public Boolean cursorPita(){
+		String columnas[] = {_ID, "PUNTOTACTICO"};
+		boolean isExist = false;
+		Cursor c = this.getReadableDatabase().query("registro", columnas, null, null, null, null, null);
+		if (c != null) {
+			if (c.getCount() < 1) {
+				isExist = true;
+			}
+		}
+		c.close();
+		return isExist;
+	}
+
+	public int prueba(){
+		String columnas[] = {_ID};
+
+		Cursor c = this.getReadableDatabase().query("registro", columnas, null, null, null, null, null);
+		if (c != null) {
+			c.getCount();
+		}
+		c.close();
+		return c.getCount();
+	}
 	public Cursor municipio(String C_ENTIDAD){
 		String columnas[] = {_ID, "C_MUNICIPIO", "NOM_MUNICIPIO"};
 		String[] ident= {C_ENTIDAD};

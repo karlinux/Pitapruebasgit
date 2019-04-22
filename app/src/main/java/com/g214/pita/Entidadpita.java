@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class Entidadpita extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private final Handler_sqlite inserta = new Handler_sqlite(this);
-    private final Handler_sqliteU insertaU = new Handler_sqliteU(this);
+    private final Handler_sqlite_puntos insertaU = new Handler_sqlite_puntos(this);
     private final Links l = new Links();
     String fecha = l.getFecha();
     String VERSION = l.getVersion();
