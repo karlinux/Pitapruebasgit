@@ -110,6 +110,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			db.execSQL(SQLUpdateV10);
 			db.execSQL(SQLUpdateV11);
 			db.execSQL(SQLUpdateV12);
+			db.execSQL(SQLUpdateV13);
 			db.execSQL(SQLUpdateV14);
 		}
 		db.execSQL(query6);
@@ -129,6 +130,11 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		valores.put("FOLIOENCUESTA", RAZONSOCIAL);
 		valores.put("DOS", "4");
 		valores.put("TRES", "27");
+		valores.put("CUATRO", "95");
+		valores.put("estado", "1");
+		valores.put("IDCUESTIONARIO", "0");
+		valores.put("YCALLE", "0");
+		valores.put("NUMPREGUNTA", "0");
 		valores.put("CREATE_BY", CREATE_BY);
 		valores.put("TIPO", TIPO);
 
@@ -158,24 +164,30 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		valores.put("carril", CARRIL);
 		valores.put("tipo", TIPO);
 
-
 		if ( (IDENCUESTA != null) && (!IDENCUESTA.equals("")) ) {
 			this.getWritableDatabase().insert("imagenes", null, valores);
 		}
 	}
 
+	public void actualizaPunto(String FOLIOENCUESTA, String PUNTO) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put("guardado", "0");
+		valores.put("RECINTOADUANAL", PUNTO);
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
+	}
 
 	// EMPRESA
-	public void actualzaRespuesta(String id, String EMPRESA, String CAMPO, String guardado)
+	public void actualzaRespuesta(String FOLIOENCUESTA, String EMPRESA, String CAMPO, String guardado)
 	{
 		ContentValues valores = new ContentValues();
 		valores.put(CAMPO, EMPRESA);
 		valores.put("guardado", guardado);
 
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
-	public void insertarPreg(String IDCUESTIONARIO, String IDENCUESTA, String RESPUESTA, String RESPUESTA_ADICIONAL, String OTRO, String NUMPREGUNTA, String FOLIORESPUESTA)
+	public void insertarPreg(String IDCUESTIONARIO, String IDENCUESTA, String RESPUESTA, String RESPUESTA_ADICIONAL, String OTRO, String NUMPREGUNTA, String FOLIORESPUESTA, String id)
 	{
 		ContentValues valores = new ContentValues();
 		valores.put("IDCUESTIONARIO", IDCUESTIONARIO);
@@ -184,6 +196,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		valores.put("RESPUESTA_ADICIONAL", RESPUESTA_ADICIONAL);
 		valores.put("OTRO", OTRO);
 		valores.put("NUMPREGUNTA", NUMPREGUNTA);
+		valores.put("SECCION", id);
 		valores.put("FOLIORESPUESTA", FOLIORESPUESTA);
 
 
@@ -192,15 +205,16 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		}
 	}
 
-	public void actualizaCor(String id, String lat, String lon, String HORATERMINO) {
+	public void actualizaCor(String FOLIOENCUESTA, String lat, String lon, String HORATERMINO) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("guardado", "0");
 		valores.put("latitud", lat);
 		valores.put("longitud", lon);
 		valores.put("NUMPREGUNTA", "0");
+		valores.put("estado", "0");
 		valores.put("HORATERMINO", HORATERMINO);
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
 	public void borrar(String id, String tabla) {
@@ -247,14 +261,14 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 	public String numeroPregunta(String campo, String numero){
 		String result="0";
-		String columnas[] = {"RESPUESTA"};
+		String columnas[] = {"SECCION"};
 		String ide[] = {numero};
 		try{
 			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  campo+"=?", ide, null, null, null);
 			c.moveToLast();
 			if ( c.getCount() > 0) {
 				int iu;
-				iu = c.getColumnIndex("RESPUESTA");
+				iu = c.getColumnIndex("SECCION");
 				result = c.getString(iu);
 			}
 		}catch(SQLiteException e){
@@ -308,6 +322,14 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		String columnas[] = {_ID, "estado", "tipo", "carril"};
 		String ide[] = {FOLIOENCUESTA};
 		Cursor c = this.getReadableDatabase().query(imagenes, columnas, "IDENCUESTA=?", ide, null, null, null, null);
+
+		return c;
+	}
+
+	public Cursor respuestasDetalle(String FOLIOENCUESTA){
+		String columnas[] = {_ID, "estado", "IDCUESTIONARIO", "PREGUNTA", "RESPUESTA", "RESPUESTA_ADICIONAL"};
+		String ide[] = {FOLIOENCUESTA};
+		Cursor c = this.getReadableDatabase().query(respuestas, columnas, "IDCUESTIONARIO=?", ide, null, null, null, null);
 
 		return c;
 	}
@@ -377,6 +399,28 @@ public class Handler_sqlite extends SQLiteOpenHelper {
         return result;
     }
 
+	public String NUMPREGUNTAFOTOS(String FOLIOENCUESTA){
+		String result="0";
+		String columnas[] = {"YCALLE"};
+		String ids [] ={FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ids, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex("YCALLE");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
 	public String NUMPREGUNTA(String FOLIOENCUESTA, String SECCION){
 		String result="0";
 		String columnas[] = {SECCION};
@@ -399,10 +443,20 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 
-	public void actualizaPregunta(String FOLIOENCUESTA, String NUMPREGUNTA, String seccion) {
+	public void actualizaPregunta(String FOLIOENCUESTA, String NUMPREGUNTA, String seccion, String imagen) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put(seccion, NUMPREGUNTA);
+		valores.put("IDCUESTIONARIO", imagen);
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
+	}
+
+	public void actualizaPregunta(String FOLIOENCUESTA, String NUMPREGUNTA, String seccion, String imagen, String tipo) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put(seccion, NUMPREGUNTA);
+		valores.put("IDCUESTIONARIO", imagen);
+		valores.put("NUMPREGUNTA", tipo);
 		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
@@ -410,6 +464,21 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("NUMPREGUNTA", NUMPREGUNTA);
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {id});
+	}
+
+	public void actualizaFotos(String id, String NUMPREGUNTA ) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put("YCALLE", NUMPREGUNTA);
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {id});
+	}
+	public void actualizaFoto(String id, String NUMPREGUNTA, String IDCUESTIONARIO, String campo, String num) {
+		// TODO Auto-generated method stub
+		ContentValues valores = new ContentValues();
+		valores.put("NUMPREGUNTA", NUMPREGUNTA);
+		valores.put("IDCUESTIONARIO", IDCUESTIONARIO);
+		valores.put(campo, num);
 		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {id});
 	}
 
@@ -503,30 +572,30 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	}
 
 
-	public void actualizaDomicilio(String id, String cp, String calle, String numext, String numint, String cveedo,
-								   String cvemun, String FOLIOENCUESTA, String imei, String colonia, String HORAINICIO,
+	public void actualizaDomicilio(String FOLIOENCUESTA, String cp, String calle, String numext, String numint, String cveedo,
+								   String cvemun, String imei, String colonia, String HORAINICIO,
 								   String NOMBREENTREVISTADOR, String CLAVEENTREVISTADOR) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("guardado", "2");
+		valores.put("estado", "1");
 		valores.put("CP", cp);
 		valores.put("CALLE", calle);
 		valores.put("NUMEROEXT", numext);
 		valores.put("NUMEROINT", numint);
 		valores.put("CVEENT", cveedo);
 		valores.put("CVEMUN", cvemun);
-		valores.put("FOLIOENCUESTA", FOLIOENCUESTA);
 		valores.put("CREATE_BY", imei);
 		valores.put("COLONIA", colonia);
 		valores.put("HORAINICIO", HORAINICIO);
 		valores.put("NOMBREENTREVISTADOR", NOMBREENTREVISTADOR);
 		valores.put("CLAVEENTREVISTADOR", CLAVEENTREVISTADOR);
 
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
 
-	public void actualizaEntidad(String id, String cveedo, String cvemun,  String cveloc, String colonia) {
+	public void actualizaEntidad(String FOLIOENCUESTA , String cveedo, String cvemun,  String cveloc, String colonia) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("guardado", "3");
@@ -535,16 +604,16 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		valores.put("CVELOC", cveloc);
 		valores.put("COLONIA", colonia);
 
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
-	public void actualizaEntidad(String id, String cveloc) {
+	public void actualizaEntidad(String FOLIOENCUESTA, String cveloc) {
 		// TODO Auto-generated method stub
 		ContentValues valores = new ContentValues();
 		valores.put("guardado", "3");
 		valores.put("CVELOC", cveloc);
 
-		this.getWritableDatabase().update(encuesta, valores, "_ID=?", new String[] {id});
+		this.getWritableDatabase().update(encuesta, valores, "FOLIOENCUESTA=?", new String[] {FOLIOENCUESTA});
 	}
 
 	public void actualizaCalles(String id, String calle1, String calle2) {
@@ -560,8 +629,8 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 	public Cursor revisar(){
 		String columnas[] = {_ID, "FOLIOENCUESTA", "RECINTOADUANAL", "estado"};
-		String[] ident= {"0"};
-		Cursor c = this.getReadableDatabase().query(encuesta, columnas, null, null, null, null, null);
+		String[] ident= {"null"};
+		Cursor c = this.getReadableDatabase().query(encuesta, columnas, "LATITUD!=?", ident, null, null, null);
 		return c;
 	}
 
@@ -620,7 +689,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	}
 
 	public Cursor enviarEspuestas(String ide){
-		String columnas[] = {_ID,  "IDCUESTIONARIO", "PREGUNTA", "RESPUESTA", "RESPUESTA_ADICIONAL", "OTRO", "FOLIORESPUESTA"};
+		String columnas[] = {_ID,  "IDCUESTIONARIO", "PREGUNTA", "RESPUESTA", "RESPUESTA_ADICIONAL", "OTRO", "FOLIORESPUESTA", "SECCION"};
 
 		String[] ident= {ide};															// group by Having order by, limit
 		Cursor c = this.getReadableDatabase().query(respuestas, columnas, "estado=?", ident, null, null, null, "0,30");
@@ -635,10 +704,55 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return c;
 	}
 
+	public String imagen(String FOLIOENCUESTA){
+		String result="0";
+		String campo1 = "IDCUESTIONARIO";
+		String columnas[] = {campo1};
+		String[] ident= {FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ident, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(campo1);
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
+	public String guardado2(String FOLIOENCUESTA){
+		String result="0";
+		String columnas[] = {"guardado"};
+		String[] ident= {FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ident, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex("guardado");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
 	public Cursor enviar(String ide){
 		String columnas[] = {_ID, "FOLIOENCUESTA", "CODIGORESULTADO", "CVEENT", "CVEMUN", "CVELOC", "COLONIA", "RECINTOADUANAL",
 				"CALLE", "NUMEROINT", "NUMEROEXT", "ENTRECALLE", "YCALLE", "CP", "NOMBREENTREVISTADOR", "CLAVEENTREVISTADOR", "HORAINICIO",
-				"HORATERMINO", "OTRO_CODIGORESULTADO", "LATITUD", "LONGITUD", "CREATE_BY", "FECHAENTREVISTA", "CORREO", "RESPONSABLEPITA"};
+				"HORATERMINO", "OTRO_CODIGORESULTADO", "LATITUD", "LONGITUD", "CREATE_BY", "FECHAENTREVISTA", "RESPONSABLEPITA", "CORREO"};
 		String[] ident= {ide};															// group by Having order by, limit
 		Cursor c = this.getReadableDatabase().query(encuesta, columnas, "estado=?", ident, null, null, null, "0,30");
 		return c;
@@ -701,12 +815,12 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 
-	public String maxnumero(String FOLIOENCUESTA){
+	public String maxnumero(String FOLIOENCUESTA, String limite){
 		String result="";
 		String columnas[] = {"MAX(CAST(NUMPREGUNTA as NUMBER)) maximo"};
-		String ident[] = {FOLIOENCUESTA};
+		String ident[] = {FOLIOENCUESTA, limite};
 		try{
-			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  "IDCUESTIONARIO=?", ident, null, null, null);
+			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  "IDCUESTIONARIO=? and CAST(NUMPREGUNTA as NUMBER)<=?", ident, null, null, null);
 			c.moveToLast();
 			if ( c.getCount() > 0) {
 				int iu;
@@ -717,27 +831,6 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			System.err.println("Exception @ rawQuery: " + e.getMessage());
 			{
 				result="";
-			}
-
-		}
-		return result;
-	}
-
-	public String guardado2(){
-		String result="0";
-		String columnas[] = {"guardado"};
-		try{
-			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  null, null, null, null, null);
-			c.moveToLast();
-			if ( c.getCount() > 0) {
-				int iu;
-				iu = c.getColumnIndex("guardado");
-				result = c.getString(iu);
-			}
-		}catch(SQLiteException e){
-			System.err.println("Exception @ rawQuery: " + e.getMessage());
-			{
-				result="0";
 			}
 
 		}
@@ -833,6 +926,29 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return result;
 	}
 
+	public String idenRespuestas(String FOLIOENCUESTA){
+		String result="0";
+		String columnas[] = {_ID};
+		String ide[] = {FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  "IDCUESTIONARIO=?", ide,null, null, null);
+			//c.moveToFirst();
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(_ID);
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
 	public String documento(){
 		String result="0";
 		String columnas[] = {"tipo"};
@@ -876,6 +992,53 @@ public class Handler_sqlite extends SQLiteOpenHelper {
         }
         return result;
     }
+
+	public String iden(String FOLIOENCUESTA){
+		String result="0";
+		String columnas[] = {_ID};
+		String ide[] = {FOLIOENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query(encuesta, columnas,  "FOLIOENCUESTA=?", ide, null, null, null);
+			//c.moveToFirst();
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(_ID);
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
+
+	public String idenFoto(String IDENCUESTA){
+		String result="0";
+		String columnas[] = {_ID};
+		String ide[] = {IDENCUESTA};
+		try{
+			Cursor c = this.getReadableDatabase().query("imagenes", columnas,  "IDENCUESTA=?", ide, null, null, null);
+			//c.moveToFirst();
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex(_ID);
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
 
 	public String idenFoto(){
 		String result="0";
@@ -961,4 +1124,34 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 
 		this.close();
 	}
+/*
+	public static void BD_backup() throws IOException {
+		String timeStamp = new SimpleDateFormat(“ddMMyyyy_HHmmss”).format(new Date());
+
+		final String inFileName = "/data / data / com.g214.pita / databases /"+DATABASE_NAME;
+		File dbFile = new File(inFileName);
+		FileInputStream fis = null;
+
+		fis = new FileInputStream(dbFile);
+
+		String directorio = obtenerDirectorioCopias();
+		File d = new File(directorio);
+		if (!d.exists()) {
+			d.mkdir();
+		}
+		String outFileName = directorio + “/”+DATABASE_NAME + “_”+timeStamp;
+
+		OutputStream output = new FileOutputStream(outFileName);
+
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = fis.read(buffer)) > 0) {
+			output.write(buffer, 0, length);
+		}
+
+		output.flush();
+		output.close();
+		fis.close();
+	}
+	*/
 }
