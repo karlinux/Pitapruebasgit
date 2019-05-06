@@ -38,7 +38,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:textStyle="normal|bold" />
-
+        <Button
+            android:id="@+id/btnRevisar"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@drawable/borde"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colortextobotones"
+            android:layout_margin="20dp"
+            android:text="R"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -175,6 +183,16 @@
         </LinearLayout>
         <Button
             android:id="@+id/btnFinalizar"
+            android:layout_width="140dp"
+            android:layout_height="45dp"
+            android:background="@drawable/borde"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colortextobotones"
+            android:layout_margin="20dp"
+            android:text="FINALIZAR"
+            android:textSize="@dimen/textoboton"/>
+        <Button
+            android:id="@+id/btnTerminar"
             android:layout_width="140dp"
             android:layout_height="45dp"
             android:background="@drawable/borde"

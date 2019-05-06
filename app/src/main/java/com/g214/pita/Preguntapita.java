@@ -641,11 +641,11 @@ public class Preguntapita extends AppCompatActivity {
 
                 if(num!=0) {
                     inserta.abrir();
-                    inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
+                    inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA,"");
                     if(numpregunta==9 && pregunta.equals("1")) {
                         //Toast.makeText(Preguntapita.this, "ENTRA", Toast.LENGTH_SHORT).show();
                     }else{
-                        inserta.actualizaPregunta(id, Integer.toString(numpregunta), "UNO");
+                        inserta.actualizaPregunta(id, Integer.toString(numpregunta), "UNO", "0");
 
                     }
                     inserta.cerrar();

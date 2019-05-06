@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -35,7 +36,7 @@ public class Empresapita extends AppCompatActivity {
     TextView tvVersion;
     Button btnGuardar, btnRegresar;
     Bundle bolsa;
-    String n, error, identificador, textin, imeistring, usuario, id, estado, Siguiente;
+    String n, error, identificador, textin, imeistring, usuario, id, estado, Siguiente, FOLIOENCUESTA;
     //Intents
     String Dialogo, Domicilio;
     int num;
@@ -48,6 +49,12 @@ public class Empresapita extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        inserta.abrir();
+        Cursor curPunto = inserta.punto();
+        curPunto.moveToLast();
+        FOLIOENCUESTA = curPunto.getString(0);
+        inserta.cerrar();
 
         Dialogo = ".Dialogo" + APK;
         Domicilio =".Domicilio" + APK;
@@ -86,20 +93,10 @@ public class Empresapita extends AppCompatActivity {
         etRazon = (EditText) findViewById(R.id.etRazon);
 
         inserta.abrir();
-        n = inserta.guardado2();
+        n = inserta.guardado2(FOLIOENCUESTA);
         inserta.cerrar();
         //Toast.makeText(this, n, Toast.LENGTH_SHORT).show();
 
-
-
-        if(n.equals("1")){
-            etRazon.setHint("Empresa responsable de Obra");
-            error = "INGRESE EL NOMBRE DE LA EMPRESA";
-        }else{
-            error = "INGRESE EL NOMBRE RECINTO ADUANAL";
-                etRazon.setHint("Recinto Aduanal");
-            Domicilio = ".Empresa" + APK;
-        }
 
         if(n.equals("3")){
                 error = "INGRESE EL NOMBRE DEL RESPONSABLE";
@@ -146,12 +143,12 @@ public class Empresapita extends AppCompatActivity {
                 inserta.cerrar();
                 }
 
-                Intent inte = new Intent(Dialogo);
+                Intent inte = new Intent(".Empresapita");
                 startActivity(inte);
                 finish();
             }
         });
-
+        //Toast.makeText(Empresapita.this, n, Toast.LENGTH_SHORT).show();
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,19 +160,11 @@ public class Empresapita extends AppCompatActivity {
                     //}else {
                         inserta.abrir();
                         switch (n) {
-                            case "":
-                            case "0":
-                                inserta.insertarReg(etRazon.getText().toString(), imeistring, "2");
-                                error = "INGRESE ";
-                                break;
-                            case "1":
-                                inserta.actualzaRespuesta(id, etRazon.getText().toString(), "EMPRESA", "1");
-                                break;
                             case "3":
-                                inserta.actualzaRespuesta(id, etRazon.getText().toString(), "RESPONSABLEPITA", "4");
+                                inserta.actualzaRespuesta(FOLIOENCUESTA, etRazon.getText().toString(), "RESPONSABLEPITA", "4");
                                 break;
                             case "4":
-                                inserta.actualzaRespuesta(id, etRazon.getText().toString(), "CORREO", "5");
+                                inserta.actualzaRespuesta(FOLIOENCUESTA, etRazon.getText().toString(), "CORREO", "5");
                                 break;
                         }
                         inserta.cerrar();

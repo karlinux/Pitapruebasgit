@@ -84,6 +84,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Fotocarrilespita"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name=".Fotocarrilespita" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Sincronizapita"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

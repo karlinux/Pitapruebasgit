@@ -198,7 +198,7 @@ public class Multipuntopita extends AppCompatActivity {
         initItems(numpregunta);
         myItemsListAdapter = new ItemsListAdapter(this, items);
 
-        Toast.makeText(this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, Integer.toString(numpregunta), Toast.LENGTH_SHORT).show();
         listView.setAdapter(myItemsListAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -285,9 +285,6 @@ public class Multipuntopita extends AppCompatActivity {
         }else if(numpregunta>90){
             tvVersion.setText("IV. Vehículos de carga");
             tvEmpresa.setText("4.14. Centro de monitoreo");
-        }else if(numpregunta>79){
-            tvVersion.setText("IV. Vehículos de carga");
-            tvEmpresa.setText("4.13. Carriles Administrados");
         }else if(numpregunta>79){
             tvVersion.setText("IV. Vehículos de carga");
             tvEmpresa.setText("4.12. Carriles Administrados");
@@ -1132,9 +1129,7 @@ public class Multipuntopita extends AppCompatActivity {
             case 56:    //4.4.7.
             case 67:    //4.7.1.
             case 68:    //4.7.2.
-            case 69:    //4.7.3.
             case 73:    //4.9.1.
-            case 74:    //4.9.2.
             case 82:    //4.11.1.
             case 83:    //4.11.2.
             case 84:    //4.11.3.
@@ -1318,6 +1313,8 @@ public class Multipuntopita extends AppCompatActivity {
             case 61:    //4.4.8.
             case 62:    //4.4.8.
             case 63:    //4.4.8.
+            case 69:    //4.7.3.
+            case 74:    //4.9.2.
             case 78:    //4.9.2.
             case 99:    //4.12.8.
             case 101:    //4.12.10.
@@ -1348,16 +1345,16 @@ public class Multipuntopita extends AppCompatActivity {
                     rbOp1.setText("a) Existe");
                     rbOp2.setText("b) No existe");
                 }
-                if(numpregunta==46 || numpregunta==58 || numpregunta==72){
+                if(numpregunta==46 || numpregunta==57 || numpregunta==74 || numpregunta==69){
                     rbOp1.setText("a) Ya están colocadas");
                     rbOp2.setText("b) No están colocadas");
                 }
-                if(numpregunta==26){
+                if(numpregunta==26 || numpregunta==63){
                     rbOp1.setText("a) Tiene");
                     rbOp2.setText("b) No tiene");
                 }
 
-                if(numpregunta==78){
+                if(numpregunta==78 || numpregunta==61){
                     rbOp1.setText("a) Instalado");
                     rbOp2.setText("b) Sin instalar");
                 }
@@ -1396,19 +1393,22 @@ public class Multipuntopita extends AppCompatActivity {
                 }else if(numpregunta<59) {
                     preguntabase = "49";
                     tipo = "8";
-                }else if(numpregunta<63) {
-                    preguntabase = "49";
-                    tipo = "12";
-                }else if(numpregunta<63) {
+                }else if(numpregunta<64) {
                     preguntabase = "60";
                     tipo = "8";
                 }else if(numpregunta<67) {
                     preguntabase = "62";
                     tipo = "9";
+                }else if(numpregunta<71) {
+                    preguntabase = "66";
+                    tipo = "9";
                 }else if(numpregunta<74) {
                     preguntabase = "68";
                     tipo = "9";
-                }else{
+                }else if(numpregunta<77) {
+                preguntabase = "72";
+                tipo = "13";
+                }else {
                     preguntabase = "77";
                     tipo = "14";
                 }
@@ -1431,7 +1431,8 @@ public class Multipuntopita extends AppCompatActivity {
                 }else{
                     tvPregunta.setText(IDPREGUNTAS[numpregunta] + PREGUNTAS[numpregunta]);
                 }
-                Toast.makeText(this, carril, Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(this, carril, Toast.LENGTH_SHORT).show();
 
                 btnGuardar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1469,6 +1470,15 @@ public class Multipuntopita extends AppCompatActivity {
                                     break;
                                 case 57:
                                     numpregunta = 48;
+                                    break;
+                                case 69:                        //
+                                    numpregunta = 65;           //
+                                    break;
+                                case 63:
+                                    numpregunta = 59;
+                                    break;
+                                case 74:                        //
+                                    numpregunta = 71;           //
                                     break;
                                 case 78:
                                     numpregunta = 76;

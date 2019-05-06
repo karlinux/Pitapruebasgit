@@ -24,8 +24,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,19 +33,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by carlos on 30/06/17.
  */
 
-public class Fotopita extends Activity {
+public class Fotocarrilespita extends Activity {
     private final Handler_sqlite inserta = new Handler_sqlite(this);
     private final Links l = new Links();
     String APK = l.getApk();
@@ -59,15 +53,14 @@ public class Fotopita extends Activity {
     Button btnGuardar, btnFinalizar, btnRegresar;
     ImageButton btnFoto;
     EditText etCarril;
-    String imeistring, nombrefoto, foto, imagen, fecha, id, seccion, fotoimagen, cuis, dm, Gps, Foto, Inicio, FOLIOENCUESTA, nameFoto, carril, Siguiente;
+    String imeistring, nombrefoto, foto, imagen, fecha, id, cuis, dm, Gps, Foto, Inicio, FOLIOENCUESTA, nameFoto, carril, Siguiente;
     TextView tvNumero, tvFecha, tvPosicion;
     Spinner spDocumento;
-    Bundle bolsa;
     Typeface ligt, regular, medio;
     ListView lista;
     Boolean bool;
     Cursor curPunto;
-    int numpregunta, cuestionario, numpregunta2;
+    int numpregunta;
     String [] tipoFoto;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,22 +73,9 @@ public class Fotopita extends Activity {
             Siguiente=".Gps" + APK;
         }
 
-        tipoFoto = new String[]{"",
-                "Video vigilancia",             //1
-                "Vehículos ligeros",            //2
-                "Vehículos de carga",           //3
-                "Infraestructura auxiliar",     //4
-                "Binomio canino",               //5
-                "Carril administrado",          //6
-                "Zona de revisión ",            //7
-                "Control de carga peatonal",    //8
-                "Zona de amarillos de carga",   //9
-                "Zona de revisión de carga",    //10
-                "Centro de monitoreo",          //11
-                "Equipos moviles",              //12
-                "Zona de rojos de carga",       //13
-                "Sensores en espacios de carga",       //14
-                "Zona de rayos x"};              //15
+        tipoFoto = new String[]{"", "Video vigilancia", "Vehículos ligeros", "Vehículos de carga", "Infraestructura auxiliar",
+                "Binomio canino", "Carril administrado", "Zona de revisión ", "Control de carga peatonal", "Zona de amarillos de carga",
+                "Zona de revisión de carga", "Centro de monitoreo", ""};
 
         tvFecha = (TextView) findViewById(R.id.tvFecha);
         etCarril = (EditText) findViewById(R.id.etCarril);
@@ -113,18 +93,13 @@ public class Fotopita extends Activity {
         tvNumero.setVisibility(View.GONE);
         btnFinalizar.setVisibility(View.GONE);
 
-        bolsa = getIntent().getExtras();
-        inserta.abrir();
-        cuestionario = Integer.parseInt(bolsa.getString("numpregunta"));
-        inserta.cerrar();
-
         RadioGroup contenedor = (RadioGroup) findViewById(R.id.rgDoc);
         contenedor.setVisibility(View.GONE);
 
         carril = "";
 
         Gps = ".Gps" + APK;
-        Foto = ".Foto" + APK;
+        Foto = ".Fotocarriles" + APK;
         Inicio = ".Inicio" + APK;
 
         tvFecha.setText(fechaini);
@@ -173,8 +148,7 @@ public class Fotopita extends Activity {
         inserta.cerrar();
 
         inserta.abrir();
-        numpregunta = Integer.parseInt(inserta.NUMPREGUNTAFOTO(FOLIOENCUESTA));
-        fotoimagen = inserta.imagen(FOLIOENCUESTA);
+        numpregunta = Integer.parseInt(inserta.NUMPREGUNTAFOTOS(FOLIOENCUESTA));
         inserta.cerrar();
         tvPosicion.setText(tipoFoto[numpregunta]);
         //Toast.makeText(this, FOLIOENCUESTA, Toast.LENGTH_SHORT).show();
@@ -184,35 +158,30 @@ public class Fotopita extends Activity {
         nameFoto = inserta.idenFoto(FOLIOENCUESTA);
         id = inserta.iden(FOLIOENCUESTA);
         fecha = inserta.fecha("encuesta", "FECHAENTREVISTA", FOLIOENCUESTA);
-        id = inserta.idenRespuestas(FOLIOENCUESTA);
         inserta.cerrar();
-
-        switch (cuestionario){ //// Primer switch Seccion de Preguntas
-
-            case 0:
-                seccion = "UNO";
-                numpregunta2 = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
-                break;
-
-            case 4:
-                seccion = "DOS";
-                numpregunta2 = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
-                break;
-            case 27:
-                seccion = "TRES";
-                numpregunta2 = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
-                break;
-            case 102:
-                seccion = "CUATRO";
-                numpregunta2 = Integer.parseInt(inserta.NUMPREGUNTA(FOLIOENCUESTA, seccion));
-                break;
-
-        }
 
         nameFoto = Integer.toString(Integer.parseInt(nameFoto) + 1);
 
+        switch (numpregunta){
+            case 1:
                 etCarril.setVisibility(View.GONE);
-
+                break;
+            case 5:
+                etCarril.setVisibility(View.GONE);
+                break;
+            case 6:
+                etCarril.setVisibility(View.GONE);
+                break;
+            case 4:
+                etCarril.setVisibility(View.GONE);
+                break;
+            case 7:
+            case 9:
+            case 10:
+            case 11:
+                etCarril.setVisibility(View.GONE);
+                break;
+        }
         imagen = Environment.getExternalStorageDirectory() + "/"+ carpeta +"/";
         TelephonyManager telephonyManager;
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -311,14 +280,30 @@ public class Fotopita extends Activity {
                     error="";
                 }
 
+                switch (numpregunta){
+                    case 2:
+                        if (carril.equals("")) {
+                            error = "INGRESE EL CARRIL";
+                        }
+                        break;
+                    case 3:
+                        if (carril.equals("")) {
+                            error = "INGRESE EL CARRIL";
+                        }
+                        break;
+                    case 8:
+                        if (carril.equals("")) {
+                            error = "INGRESE EL CARRIL";
+                        }
+                        break;
+                }
                 if(error.equals("")){
 
                     inserta.abrir();
-                    inserta.insertaFoto(FOLIOENCUESTA, nombrefoto, Integer.toString(numpregunta), id);
+                    inserta.insertaFoto(FOLIOENCUESTA, nombrefoto, Integer.toString(numpregunta), carril);
                     inserta.cerrar();
 
                     Intent ins= new Intent(Foto);
-                    ins.putExtras(bolsa);
                     startActivity(ins);
                     finish();
 
@@ -333,60 +318,13 @@ public class Fotopita extends Activity {
             @Override
             public void onClick(View view) {
 
-                if(fotoimagen.equals("1")){
-                    numpregunta2++;
+                inserta.abrir();
+                inserta.actualizaFotos(FOLIOENCUESTA, "0");
+                inserta.cerrar();
+                Intent ins = new Intent(".Menupita");
+                startActivity(ins);
+                finish();
 
-                    switch (numpregunta){
-
-
-                    }
-                    // En esta fase se regresa al principio del ciclo
-
-                    switch (numpregunta2){               //
-                        case 15:                        //
-                            numpregunta2 = 5;            //
-                            break;
-                        case 20:
-                            numpregunta2 = 17;
-                            break;
-                        case 26:
-                            numpregunta2 = 22;
-                            break;                      //
-                        case 46:
-                            numpregunta2 = 28;
-                            break;
-                        case 57:
-                            numpregunta2 = 48;
-                            break;
-                        case 69:                        //
-                            numpregunta2 = 65;            //
-                            break;                      //
-                        case 74:                        //
-                            numpregunta2 = 71;           //
-                            break;
-                        case 78:
-                            numpregunta2 = 76;
-                            break;
-                        case 89:                        //
-                            numpregunta2 = 80;           //
-                            break;
-                    }                                   //
-                    //////////////////////////////////////
-                    inserta.abrir();
-                    inserta.actualizaFoto(FOLIOENCUESTA, "0", "0", seccion, Integer.toString(numpregunta2));
-                    inserta.cerrar();
-                    Intent ins = new Intent(".Multipuntopita");
-                    ins.putExtras(bolsa);
-                    startActivity(ins);
-                    finish();
-                }else{
-                    inserta.abrir();
-                    inserta.actualizaFoto(FOLIOENCUESTA, "0");
-                    inserta.cerrar();
-                    Intent ins = new Intent(".Imagenespita");
-                    startActivity(ins);
-                    finish();
-                }
             }
         });
 
@@ -432,7 +370,6 @@ public class Fotopita extends Activity {
 
             }
             Intent inteF = new Intent(Foto);
-            inteF.putExtras(bolsa);
             startActivity(inteF);
             finish();
             foto="";
@@ -472,9 +409,7 @@ public class Fotopita extends Activity {
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {
             Intent int1 = new Intent(Foto);
-            int1.putExtras(bolsa);
             startActivity(int1);
-            finish();
             return true;
         }else if (keyCode == 139){
 
@@ -501,7 +436,6 @@ public class Fotopita extends Activity {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
                 Intent inteF = new Intent(Foto);
-                inteF.putExtras(bolsa);
                 startActivity(inteF);
                 finish();
 

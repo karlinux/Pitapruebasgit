@@ -145,49 +145,20 @@ public class Sincronizapita extends AppCompatActivity {
                         datos.getString(23)==null? "-":datos.getString(23),
                         datos.getString(24)==null? "-":datos.getString(24)
                 };
-/*
-                String[] unarreglo = {
-                        datos.getString(0),
-                        datos.getString(1),
-                        datos.getString(2),
-                        datos.getString(3),
-                        datos.getString(4),
-                        datos.getString(5),
-                        datos.getString(6),
-                        datos.getString(7),
-                        datos.getString(8),
-                        datos.getString(9),
-                        datos.getString(10),
-                        datos.getString(11),
-                        datos.getString(12),
-                        datos.getString(13),
-                        datos.getString(14),
-                        datos.getString(15),
-                        datos.getString(16),
-                        datos.getString(17),
-                        datos.getString(18),
-                        datos.getString(19),
-                        datos.getString(20),
-                        datos.getString(21),
-                        datos.getString(22),
-                        correo,
-                        responsable
-                };
-*/
                 nuevaTarea.execute(unarreglo);
             }
 
         }else{
 
-            Cursor respuestas = inserta.enviarImagenes(enviar);
-            numdatos = respuestas.getCount();
+            Cursor enviarImagenes = inserta.enviarImagenes(enviar);
+            numdatos = enviarImagenes.getCount();
             sinc = numdatos;
 
             if(numdatos!=0) {
-                while (respuestas.moveToNext()) {
-                    Uprespuestas tareaRespuestas = new Uprespuestas();
+                while (enviarImagenes.moveToNext()) {
+                    UpImagenes tareaRespuestas = new UpImagenes();
 
-                    foto1  = imagen + respuestas.getString(1);
+                    foto1  = imagen + enviarImagenes.getString(1);
 
                     File file = new File(foto1);
                     Log.d("IMAGENSINCRO", foto1);
@@ -195,18 +166,18 @@ public class Sincronizapita extends AppCompatActivity {
                         //foto1 = imagenes;
 
                         String carril = "";
-                        if (respuestas.getString(2) == null) {
+                        if (enviarImagenes.getString(2) == null) {
                             carril = "0";
                         }else{
-                            carril = respuestas.getString(2);
+                            carril = enviarImagenes.getString(2);
                         }
                         String[] arregloRespuestas = {
-                                respuestas.getString(0)==null? "-":respuestas.getString(0),
-                                respuestas.getString(1)==null? "-":respuestas.getString(1),
-                                respuestas.getString(2)==null? "-":respuestas.getString(2),
-                                respuestas.getString(3)==null? "-":respuestas.getString(3),
-                                respuestas.getString(4)==null? "-":respuestas.getString(4),
-                                respuestas.getString(5)==null? "-":respuestas.getString(5),
+                                enviarImagenes.getString(0)==null? "-":enviarImagenes.getString(0),
+                                enviarImagenes.getString(1)==null? "-":enviarImagenes.getString(1),
+                                enviarImagenes.getString(2)==null? "-":enviarImagenes.getString(2),
+                                enviarImagenes.getString(3)==null? "-":enviarImagenes.getString(3),
+                                enviarImagenes.getString(4)==null? "-":enviarImagenes.getString(4),
+                                enviarImagenes.getString(5)==null? "-":enviarImagenes.getString(5),
                                 foto1,
                                 "IMAGENES"
                         };
@@ -215,12 +186,40 @@ public class Sincronizapita extends AppCompatActivity {
                         Toast.makeText(this, "No existe imagen", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                enviarImagenes.close();
             }else{
-                Toast.makeText(getApplicationContext(),
-                        "NO HAY DATOS PARA SINCRONIZAR",
-                        Toast.LENGTH_SHORT).show();
+
+                Cursor respuestas = inserta.enviarEspuestas(enviar);
+                numdatos = respuestas.getCount();
+                sinc = numdatos;
+
+                if(numdatos!=0) {
+
+                    while (respuestas.moveToNext()) {
+                        Uprespuestas tareaRespuestas = new Uprespuestas();
+
+                            String[] arregloRespuestas = {
+                                    respuestas.getString(0)==null? "-":respuestas.getString(0),
+                                    respuestas.getString(1)==null? "-":respuestas.getString(1),
+                                    respuestas.getString(2)==null? "-":respuestas.getString(2),
+                                    respuestas.getString(3)==null? "-":respuestas.getString(3),
+                                    respuestas.getString(4)==null? "-":respuestas.getString(4),
+                                    respuestas.getString(5)==null? "-":respuestas.getString(5),
+                                    respuestas.getString(6)==null? "-":respuestas.getString(6),
+                                    respuestas.getString(7)==null? "-":respuestas.getString(7),
+                                    "RESPUESTAS"
+                            };
+                            tareaRespuestas.execute(arregloRespuestas);
+                    }
+
+                }else {
+                    Toast.makeText(getApplicationContext(),
+                            "NO HAY DATOS PARA SINCRONIZAR",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
-            respuestas.close();
+
         }
         datos.close();
         inserta.cerrar();
@@ -239,9 +238,7 @@ public class Sincronizapita extends AppCompatActivity {
 
     }
 
-
-
-    class Uprespuestas extends AsyncTask<String, Void, Void> {
+    class UpImagenes extends AsyncTask<String, Void, Void> {
         ProgressDialog pDialog;
         String _ID = "";
         String imagen = "";
@@ -460,7 +457,7 @@ public class Sincronizapita extends AppCompatActivity {
                 mpEntity.addPart("id", new StringBody(_ID));
 
                 mpEntity.addPart("FOLIOENCUESTA", new StringBody(FOLIOENCUESTA));
-                mpEntity.addPart("IDCUESTIONARIO", new StringBody("2"));
+                mpEntity.addPart("IDCUESTIONARIO", new StringBody("3"));
                 mpEntity.addPart("CODIGORESULTADO", new StringBody(CODIGORESULTADO));
                 mpEntity.addPart("CVEENT", new StringBody(CVEENT));
                 mpEntity.addPart("CVEMUN", new StringBody(CVEMUN));
@@ -590,6 +587,147 @@ public class Sincronizapita extends AppCompatActivity {
         cur.close();
         inserta.close();
         return listItems;
+    }
+
+    class Uprespuestas extends AsyncTask<String, Void, Void> {
+        ProgressDialog pDialog;
+
+        String _ID = "";
+        String IDCUESTIONARIO= "";
+        String PREGUNTA= "";
+        String RESPUESTA= "";
+        String RESPUESTA_ADICIONAL= "";
+        String OTRO= "";
+        String FOLIORESPUESTA = "";
+        String SECCION = "";
+        String TABLA = "";
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            _ID = params[0];
+            IDCUESTIONARIO= params[1];
+            PREGUNTA= params[2];
+            RESPUESTA= params[3];
+            RESPUESTA_ADICIONAL= params[4];
+            OTRO= params[5];
+            FOLIORESPUESTA= params[6];
+            SECCION= params[7];
+            TABLA = params[8];
+
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                httpclient.getParams().setParameter(
+                        CoreProtocolPNames.PROTOCOL_VERSION,
+                        HttpVersion.HTTP_1_1);
+
+                HttpPost httppost = new HttpPost(li + "sincronizar.php");
+
+                MultipartEntity mpEntity = new MultipartEntity();
+
+                if(sinc == 1){
+                    mpEntity.addPart("eliminar", new StringBody("1"));
+                }else{
+                    mpEntity.addPart("eliminar", new StringBody("0"));
+                }
+                mpEntity.addPart("foto", new StringBody("0"));
+                mpEntity.addPart("tabla", new StringBody(TABLA));
+                mpEntity.addPart("id", new StringBody(_ID));
+                mpEntity.addPart("IDCUESTIONARIO", new StringBody("3"));
+
+                mpEntity.addPart("FOLIOENCUESTA", new StringBody(IDCUESTIONARIO));
+                mpEntity.addPart("SECCION", new StringBody(SECCION));
+                mpEntity.addPart("PREGUNTA", new StringBody(PREGUNTA));
+                mpEntity.addPart("RESPUESTA", new StringBody(RESPUESTA,Charset.forName(HTTP.UTF_8)));
+                mpEntity.addPart("RESPUESTA_ADICIONAL", new StringBody(RESPUESTA_ADICIONAL,Charset.forName(HTTP.UTF_8)));
+                mpEntity.addPart("OTRO", new StringBody(OTRO,Charset.forName(HTTP.UTF_8)));
+                mpEntity.addPart("FOLIORESPUESTA", new StringBody(FOLIORESPUESTA));
+
+                httppost.setEntity(mpEntity);
+
+                HttpResponse resp = httpclient.execute(httppost);
+                HttpEntity ent = resp.getEntity();/* y obtenemos una respuesta */
+
+                textin = EntityUtils.toString(ent);
+
+                httpclient.getConnectionManager().shutdown();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected Boolean conectadoWifi() {
+            ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null) {
+                NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                if (info != null) {
+                    if (info.isConnected()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        protected Boolean conectadoRedMovil() {
+            ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null) {
+                NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                if (info != null) {
+                    if (info.isConnected()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Sincronizapita.this);
+            if (conectadoRedMovil() || conectadoWifi()) {
+                pDialog.setMessage("SUBIENDO DATOS ESPERE");
+            } else {
+
+                Toast.makeText(getApplicationContext(), "NO ESTA CONECTADO A INTERNET", Toast.LENGTH_LONG).show();
+            }
+            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            if(textin!=null){
+                if (textin.equals("0")) {
+                    Toast.makeText(getApplicationContext(), textin, Toast.LENGTH_LONG).show();
+                } else {
+
+                    inserta.abrir();
+                    inserta.modifica(textin, modificar, "respuestas");
+                    //Toast.makeText(getApplicationContext(), textin, Toast.LENGTH_LONG).show();
+                    inserta.cerrar();
+                    sinc--;
+
+                    if(sinc == 0){
+
+                        Toast.makeText(getApplicationContext(), textin, Toast.LENGTH_LONG).show();
+
+                        Intent intPrin3 = new Intent(getApplicationContext(), Sincronizapita.class);
+                        startActivity(intPrin3);
+                        finish();
+                    }
+                }
+            }else{
+                //Toast.makeText(getApplicationContext(), li + "sincroaduanas.php", Toast.LENGTH_SHORT).show();
+            }
+
+            pDialog.dismiss();
+        }
     }
 }
 

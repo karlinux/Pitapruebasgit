@@ -80,7 +80,8 @@ public class FotoDocpita extends Activity {
                 "Binomio canino", "Carril administrado", "Zona de revisión ", "Control de carga peatonal", "Zona de amarillos de carga",
                 "Zona de revisión de carga", "Centro de monitoreo", "Encuesta de percepción", "Instrumento de supervisión"};
 
-
+        btnFoto = (ImageButton) findViewById(R.id.btnFoto);
+        btnFoto.setVisibility(View.GONE);
         tvFecha = (TextView) findViewById(R.id.tvFecha);
         etCarril = (EditText) findViewById(R.id.etCarril);
         tvPosicion = (TextView) findViewById(R.id.tvPosicion);
@@ -95,11 +96,13 @@ public class FotoDocpita extends Activity {
         etCarril.setVisibility(View.GONE);
         tvFecha.setVisibility(View.GONE);
         tvNumero.setVisibility(View.GONE);
+        btnGuardar.setVisibility(View.GONE);
 
         contenedor = (RadioGroup) findViewById(R.id.rgDoc);
         opcionI1 = (RadioButton) contenedor.getChildAt(0);
         opcionI2 = (RadioButton) contenedor.getChildAt(1);
         spDocumento.setVisibility(View.GONE);
+        contenedor.setVisibility(View.GONE);
 
         carril = "";
 
@@ -170,7 +173,7 @@ public class FotoDocpita extends Activity {
             opcionI2.setChecked(true);
         }
 
-        tvPosicion.setText("Foto Documento");
+        tvPosicion.setText("RESPUESTAS");
 
         btnFoto = (ImageButton) findViewById(R.id.btnFoto);
 
@@ -260,7 +263,6 @@ public class FotoDocpita extends Activity {
             btnFoto.setImageResource(R.drawable.documento);
         }
 
-        btnFoto = (ImageButton) findViewById(R.id.btnFoto);
         btnFoto.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -308,7 +310,7 @@ public class FotoDocpita extends Activity {
                 if(error.equals("")){
 
                     inserta.abrir();
-                    inserta.insertaFoto(FOLIOENCUESTA, nombrefoto, documento, "");
+                    inserta.insertaFoto(FOLIOENCUESTA, nombrefoto, documento, "0");
                     inserta.cerrar();
 
                     bolsa.putString("folio", FOLIOENCUESTA);
@@ -467,6 +469,27 @@ public class FotoDocpita extends Activity {
         ArrayList<Entidad> listItems = new ArrayList<>();
 
         inserta.abrir();
+
+        Cursor res= inserta.respuestasDetalle(folio);
+        while (res.moveToNext()) {
+            String sincronizado = "";
+            if(res.getString(1).equals("1")){
+                sincronizado = "SINCRONIZADO";
+            }else{
+                sincronizado = "NO SINCRONIZADO";
+            }
+            listItems.add(
+                    new Entidad(
+                            "", "", ""+
+                            "Pregunta \n"+res.getString(3)+
+                            "\n"+sincronizado
+                    )
+            );
+        }
+        res.close();
+
+        listItems.add(new Entidad("", "", "IMÁGENES"));
+
         Cursor cur= inserta.imagenesDetalle(folio);
         while (cur.moveToNext()) {
             String sincronizado = "";

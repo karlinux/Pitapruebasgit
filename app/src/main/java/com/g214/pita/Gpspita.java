@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -60,7 +61,7 @@ public class Gpspita extends AppCompatActivity {
     TextView TextV_lat,TextV_lng,TextV_psc, tvDonde;
     int idExpediente;
     Typeface ligt, regular, medio;
-    String id, horafin, Inicio, Gps;
+    String FOLIOENCUESTA, horafin, Inicio, Gps;
 
 
     @Override
@@ -72,7 +73,9 @@ public class Gpspita extends AppCompatActivity {
         Gps = ".Gps" + APK;
 
         inserta.abrir();
-        id = inserta.iden();
+        Cursor curPunto = inserta.punto();
+        curPunto.moveToLast();
+        FOLIOENCUESTA = curPunto.getString(0);
         inserta.cerrar();
 
         Date fechaActual = new Date();
@@ -303,7 +306,7 @@ public class Gpspita extends AppCompatActivity {
             String longitud = TextV_lng.getText().toString();
 
             inserta.abrir();
-            inserta.actualizaCor(id, latitud, longitud, horafin);
+            inserta.actualizaCor(FOLIOENCUESTA, latitud, longitud, horafin);
             inserta.cerrar();
             Toast.makeText(getApplicationContext(), "Datos Guardados", Toast.LENGTH_SHORT).show();
             Intent intPrin = new Intent(Inicio);

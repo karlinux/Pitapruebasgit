@@ -1,5 +1,5 @@
 package com.g214.pita;
-
+//2836075738
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -84,8 +84,8 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int version_ant, int version_nue)
 	{
 		//db.execSQL(query5);
-		//db.execSQL("DROP TABLE IF EXISTS encuesta");
-		//onCreate(db);
+		db.execSQL("DROP TABLE IF EXISTS encuesta");
+		onCreate(db);
 		//db.execSQL("DROP TABLE IF EXISTS encuesta3");
 		//db.execSQL(SQLUpdateV2);
 		//onCreate(db);
@@ -116,6 +116,12 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		db.execSQL(query6);
 	}
 
+	public void registro(SQLiteDatabase db, String RAZONSOCIAL, String CREATE_BY, String TIPO){
+
+		String query ="INSERT INTO ENCUESTA(FOLIOENCUESTA, DOS, TRES, CUATRO, estado, IDCUESTIONARIO, YCALLE, NUMPREGUNTA, CREATE_BY, TIPO);";
+		this.getWritableDatabase().execSQL(query);
+
+	}
 	public void insertarMenu()
 	{
 		ContentValues valores = new ContentValues();
@@ -130,7 +136,7 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		valores.put("FOLIOENCUESTA", RAZONSOCIAL);
 		valores.put("DOS", "4");
 		valores.put("TRES", "27");
-		valores.put("CUATRO", "95");
+		valores.put("CUATRO", "102");
 		valores.put("estado", "1");
 		valores.put("IDCUESTIONARIO", "0");
 		valores.put("YCALLE", "0");
@@ -259,6 +265,14 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 		return c;
 	}
 
+	public Cursor prueba(String punto){
+		String result="0";
+		String query ="SELECT * FROM "+encuesta+" INNER JOIN RESPUESTAS on "+encuesta+".FOLIOENCUESTA = "+respuestas+".IDCUESTIONARIO";
+		Cursor c = this.getReadableDatabase().rawQuery(query, null);
+		c.moveToLast();
+		return c;
+	}
+
 	public String numeroPregunta(String campo, String numero){
 		String result="0";
 		String columnas[] = {"SECCION"};
@@ -269,6 +283,37 @@ public class Handler_sqlite extends SQLiteOpenHelper {
 			if ( c.getCount() > 0) {
 				int iu;
 				iu = c.getColumnIndex("SECCION");
+				result = c.getString(iu);
+			}
+		}catch(SQLiteException e){
+			System.err.println("Exception @ rawQuery: " + e.getMessage());
+			{
+				result="0";
+			}
+
+		}
+		return result;
+	}
+
+
+	public Cursor contarCarril(String campo, String numero){
+		Cursor c;
+		String columnas[] = {"RESPUESTA"};
+		String ide[] = {numero};
+		c = this.getReadableDatabase().query(respuestas, columnas,  campo+"=?", ide, null, null, null);
+		return c;
+	}
+
+	public String nombreCarril(String campo, String numero){
+		String result="0";
+		String columnas[] = {"RESPUESTA"};
+		String ide[] = {numero};
+		try{
+			Cursor c = this.getReadableDatabase().query(respuestas, columnas,  campo+"=?", ide, null, null, null);
+			c.moveToLast();
+			if ( c.getCount() > 0) {
+				int iu;
+				iu = c.getColumnIndex("RESPUESTA");
 				result = c.getString(iu);
 			}
 		}catch(SQLiteException e){

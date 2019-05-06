@@ -69,7 +69,7 @@ public class Preguntapuntopita extends AppCompatActivity {
 
         inserta.abrir();
         usuario = inserta.usuario();
-        n = inserta.guardado2();
+        n = inserta.guardado2("");
         numpregunta = 0;
         id = inserta.iden();
         FOLIOENCUESTA = inserta.FOLIOENCUESTA();
@@ -304,11 +304,11 @@ public class Preguntapuntopita extends AppCompatActivity {
                     inserta.abrir();
                     if(numpregunta==24) {
                         inserta.actualzaRespuesta(id, pregunta, campo, n);
-                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO");
-                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO", "0");
+                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA, "");
                     }else{
-                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA);
-                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO");
+                        inserta.insertarPreg(FOLIOENCUESTA, IDPREGUNTAS[numpregunta], pregunta, pregunta2, otro, Integer.toString(numpregunta), FOLIORESPUESTA,"");
+                        inserta.actualizaPregunta(id, String.valueOf(numpregunta), "UNO", "0");
                     }
                     inserta.cerrar();
 

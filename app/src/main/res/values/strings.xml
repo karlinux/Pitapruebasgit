@@ -87,10 +87,9 @@
     <item></item>
     <item>2.1.1. </item>
     <item>2.1.2. </item>
-    <item>2.1.3. </item>
-    <item>2.1.4. </item>
-    <item>2.1.5. </item>
-    <item>2.1.6. </item>
+    <item>2.2.1. </item>
+    <item>2.2.2. </item>
+    <item>3.1.1. </item>
     <item>3.2. </item>
     <item>3.2.1. </item>
     <item>3.2.2. </item>
@@ -101,37 +100,122 @@
     <item>3.2.7. </item>
     <item>3.2.8. </item>
     <item>3.2.9. </item>
+    <item>3.2.10. </item>
+
     <item>3.3.1. </item>
-    <item>3.3.2. </item>
     <item>3.4. </item>
     <item>3.4.1. </item>
     <item>3.4.2. </item>
+    <item>3.4.3. </item>
     <item>3.5.1. </item>
-    <item>3.5.2. </item>
-
     <item>3.6. </item>
     <item>3.6.1. </item>
     <item>3.6.2. </item>
     <item>3.6.3. </item>
+    <item>3.6.4. </item>
 
     <item>4.1.1. </item>
-    <item>4.1.2. </item>
     <item>4.2. </item>
     <item>4.2.1. </item>
+    <item>4.2.2. </item>
+    <item>4.2.3. </item>
+    <item>4.2.4. </item>
+    <item>4.2.5. </item>
+    <item>4.2.6. </item>
+    <item>4.2.7. </item>
+    <item>4.2.8. </item>
+    <item>4.2.9. </item>
+    <item>4.2.10. </item>
+    <item>4.2.11. </item>
+    <item>4.2.12. </item>
+    <item>4.2.13. </item>
+    <item>4.2.14. </item>
+    <item>4.2.15. </item>
+    <item>4.2.16. </item>
+    <item>4.2.17. </item>
+    <item>4.2.18. </item>
+    <item>4.3.1.</item>
+    <item>4.4.</item>
+    <item>4.4.1.</item>
+    <item>4.4.2.</item>
+    <item>4.4.3.</item>
+    <item>4.4.4.</item>
+    <item>4.4.5.</item>
+    <item>4.4.6.</item>
+    <item>4.4.7.</item>
+    <item>4.4.8.</item>
+    <item>4.4.9.</item>
+    <item>4.5.1.</item>
+    <item>4.6.</item>
+    <item>4.6.1.</item>
+    <item>4.6.2.</item>
+    <item>4.6.3.</item>
+    <item>4.6.4.</item>
 
+    <item>4.7.1.</item>
+    <item>4.8.</item>
+    <item>4.8.1.</item>
+    <item>4.8.2.</item>
+    <item>4.8.3.</item>
+    <item>4.8.4.</item>
 
+    <item>4.9.1.</item>
+    <item>4.10.</item>
+    <item>4.10.1.</item>
+    <item>4.10.2.</item>
+    <item>4.10.3.</item>
+    <item>4.11.1.</item>
+    <item>4.11.2.</item>
+    <item>4.11.3.</item>
+    <item>4.11.4.</item>
+    <item>4.12.1.</item>
+
+    <item>4.13.</item>
+    <item>4.13.1.</item>
+    <item>4.13.2.</item>
+    <item>4.13.3.</item>
+    <item>4.13.4.</item>
+    <item>4.13.5.</item>
+    <item>4.13.6.</item>
+    <item>4.13.7.</item>
+    <item>4.13.8.</item>
+    <item>4.13.9.</item>
+    <item>4.14.1.</item>
+    <item>4.14.2.</item>
+    <item>4.14.3.</item>
+    <item>4.14.4.</item>
+    <item>4.14.5.</item>
+    <item>4.14.6.</item>
+    <item>4.14.7.</item>
+    <item>4.14.7.1.</item>
+    <item>4.14.8.</item>
+    <item>4.14.9.</item>
+    <item>4.14.10.</item>
+    <item>4.14.11.</item>
+    <item>5.1.1.</item>
+    <item>6.1.1.</item>
+    <item>6.1.2.</item>
+    <item>6.1.3.</item>
+    <item>6.2.1.</item>
+    <item>6.2.2.</item>
+    <item>6.2.3.</item>
+    <item>6.3.1.</item>
+    <item></item>
+    <item></item>
+    <item></item>
+    <item></item>
+    <item></item>
     <item></item>
     </string-array>
 
     <string-array name="preguntaspita">
     <item></item>
-    <item> Contratación de video vigilancia PITA</item>
+    <item> Cuenta con video vigilancia PITA</item>
     <item> Cámaras convencionales</item>
     <item> Cuenta con Cámaras Térmicas</item>
     <item> Cámaras térmicas</item>
 
     <item>Cuenta con carriles de vehículos ligeros </item>
-    <item>Carriles ligeros</item>
     <item>Carril de vehículos ligeros.</item>
     <item>Panel de disponibilidad de carril</item>
     <item>Semáforo avance/espere</item>
@@ -142,139 +226,114 @@
     <item>Perfilador</item>
     <item>Esclusa hidráulica</item>
     <item>Fotocélula (no obligatorias, fue una mejora)</item>
+    <item>Carriles ligeros</item>
     <item>Cuenta con zonas de revisión</item>
-    <item>Zona de revisión</item>
     <item>Zona de revisión de ligeros no. </item>
     <item>Kiosco de inspección</item>
     <item>Pantalla informativa</item>
+    <item>Zona de revisión</item>
     <item>Cuenta con equipos móviles</item>
-    <item>Equipos móviles</item>
-    <item>Equipos móviles</item>
-
+    <item>Equipo móvil no</item>
     <item>Toughpad</item>
     <item>Cargador</item>
     <item>Funda</item>
+    <item>Equipos móviles</item>
     <item>Cuenta con carriles de vehículos de carga</item>
+    <item>Carril de vehículos de carga</item>
+
+    <item>Señal de entrada a carril de carga</item>
+    <item>Panel de disponibilidad (poste ménsula o techumbre)</item>
+    <item>Semáforo avance/espera</item>
+    <item>Lector de placa trasera</item>
+    <item>Sensor de Cortina</item>
+    <item>Sensor de presencia</item>
+    <item>Lector de número de contenedor</item>
+    <item>Sistema de verificación de vacíos</item>
+    <item>Lector de placa delantera</item>
+    <item>Interfón de dos niveles</item>
+    <item>Antena RFID</item>
+    <item>Controladora UCC</item>
+    <item>Panel informativo</item>
+    <item>Alarma sonora y visual</item>
+    <item>Esclusa-barrera</item>
+    <item>Ponchallantas (sólo salida)</item>
+    <item>Señalización en general (letreros)</item>
     <item>Vehículos de carga</item>
 
-    <item>Estatus del kiosco de inspección</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Contratación de equipos móviles PITA</item>
-    <item>Número de equipos móviles contratados con recursos PITA</item>
-    <item>Estatus de los equipos móviles</item>
-    <item>Estatus del toughpad</item>
-    <item>Estatus del cargador</item>
-    <item>Estatus de la funda</item>
-    <item>Contratación de obra con recursos PITA para carriles de carga</item>
-    <item>Número de carriles de carga contratados con recursos PITA</item>
-    <item>Estatus de los equipos móviles</item>
-    <item>Estatus de la señal de entrada a carril de carga</item>
-    <item>Estatus del panel de disponibilidad (poste ménsula o techumbre)</item>
-    <item>Estatus del semáforo avance/espera</item>
-    <item>Estatus del Lector de placa trasera</item>
-    <item>Estatus del sensor de Cortina</item>
-    <item>Estatus del sensor de presencia</item>
-    <item>Estatus del lector de número de contenedor</item>
-    <item>Estatus del sistema de verificación de vacíos</item>
-    <item>Estatus del lector de placa delantera</item>
-    <item>Estatus del interfon de dos niveles</item>
-    <item>Estatus de la antena RFID</item>
-    <item>Estatus de la controladora</item>
-    <item>Estatus del panel informativo</item>
-    <item>Estatus de la alarma sonora y visual</item>
-    <item>Estatus de la esclusa-barrera</item>
-    <item>Estatus del ponchallantas (sólo salida)</item>
-    <item>Estatus de la señalización en general (letreros)</item>
-    <item>Contratación de obra con recursos PITA para posiciones de control de carga peatonal</item>
-    <item>Número de posiciones de control de carga peatonal contratados con recursos PITA</item>
-    <item>Estatus de las posiciones de control de carga peatonal contratados con PITA</item>
-    <item>Estatus del panel informativo electrónico de carril</item>
-    <item>Estatus de los sensores de detección de persona en carril</item>
-    <item>Estatus de la barrera de paso peatonal (puertas abatibles)</item>
-    <item>Estatus del controlador para regular y monitorear todos los dispositivos</item>
-    <item>Estatus de la lectora RFID de proximidad</item>
-    <item>Estatus del Interfón de un nivel</item>
-    <item>Estatus de la alarma sonora y visual</item>
-    <item>Estatus de la señalización en general (letreros)</item>
-    <item>Contratación de obra con recursos PITA para posiciones de control de carga peatonal</item>
-    <item>Estatus del equipo móvil</item>
-    <item>Estatus del panel Informativo(zona de espera y de revisión)</item>
-    <item>Estatus del Acces Point</item>
-    <item>Estatus de la señalización en general (letreros)</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión de carga</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Estatus de los sensores de presencia</item>
-    <item>Estatus de la antena banner</item>
-    <item>Estatus de la señalización en general(letreros)</item>
-    <item>Estatus de la posición de control en andén de plataforma</item>
-    <item>Contratación de obra con recursos PITA para zona de revisión de carga</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Estatus de los sensores de presencia</item>
-    <item>Estatus de la antena banner</item>
-    <item>Estatus de la señalización en general(letreros)</item>
-    <item>Estatus de la posición de control en andén de plataforma</item>
-    <item>Contratación de obra con recursos PITA para centro de monitoreo</item>
-    <item>Estatus de los espacios para operadores de despacho aduanero de mercancía de carga</item>
-    <item>Estatus del espacio para posición de monitoreo de carga con cupo para dos monitores, conectado a la red LAN</item>
-    <item>Estatus de los equipos de audio (diadema y micrófono) para comunicarse con el interfón de las posiciones de control asignadas</item>
-    <item>Estatus del software cliente de visualización y de audio</item>
-    <item>Estatus de las estaciones de trabajo y sillas para operadores de despacho aduanero de mercancía de carga</item>
-    <item>Estatus del espacio de operadores de rayos gamma/X</item>
-    <item>Estatus de las estaciones de trabajo y sillas para operadores de rayos gamma/X</item>
-    <item>Estatus del espacio, servicios eléctricos y de comunicaciones para el equipo de análisis conectado a la red LAN</item>
-    <item>Estatus del espacio de cuarto de comunicaciones</item>
-    <item>Estatus del diseño y de cálculo de la estructura del centro de monitoreo</item>
-    <item>Estatus de las preparaciones para instalaciones (datos, contactos eléctricos normales, regulados y de emergencia)</item>
-    <item>Estatus del control de acceso al Centro de Monitoreo, operadores de video-vigilancia, cuarto de comunicaciones</item>
-    <item>Estatus del suministro e instalación de infraestructura auxiliar Marque con 1(uno) la infraestructura auxiliar suministrada y con 0 (cero) los conceptos no suministrados:</item>
-    <item>Estatus de los aires acondicionados para cada uno de los espacios que conformen el centro de monitoreo incluyendo las áreas comunes</item>
-    <item>Estatus del sistema de alarma y detección de humo para el centro de monitoreo</item>
-    <item>Estatus del suministro de extintores de gas halón tipo ABC</item>
-    <item>Estatus de la señalización informativa y preventiva</item>
-    <item>Estatus del suministro e instalación de un pararrayos (conforme al estudio técnico y aprobación del cuerpo de gobierno)</item>
-    <item>Estatus de la preparación de tuberías para el suministro de servicios regulados y de datos del SAT</item>
-    <item>Estatus del sistema Operativo del Centro de Monitoreo</item>
-    <item>Estatus del equipo de comunicación del interfón con las posiciones de control</item>
-    <item>Estatus del suministro y control de los botones de emergencia por operador</item>
-    <item>Estatus del sistema de alarma y detección de humo para el centro de monitoreo</item>
-    <item>Estatus dve la instalación y configuración de la red LAN y su integración a la WAN del SAT</item>
-    <item>Estatus del aplicativo desarrollado exprofeso para el SAT</item>
-    <item>Estatus del movimiento físico de los componentes de monitoreo de video-vigilancia</item>
-    <item>Estatus de las estaciones instaladas en el centro de monitoreo</item>
-    <item>Estatus del sistema de detección y supresión de fuego apropiado e independiente para el cuarto de comunicaciones.</item>
-    <item>Contratación de mobiliario y equipo necesario PITA</item>
-    <item>Estatus de las sillas para operadore (ergonómica, con descansabrazos, altura regulable y con ruedas)</item>
-    <item>Estatus de las estaciones de trabajo</item>
-    <item>Estatus de los archiveros de tres cajones</item>
-    <item>Estatus de las posiciones de monitoreo de carga por operador (equipo de cómputo personal)</item>
-    <item>Estatus de las posiciones de monitoreo básica por operador de video-vigilancia (equipo de cómputo personal)</item>
-    <item>Estatus de las posiciones de monitoreo avanzada por operador de video-vigilancia</item>
-    <item>Contratación de Carriles Administrados</item>
-    <item>Número de Carriles Administrados</item>
-    <item>Estatus de los Carriles Administrados</item>
-    <item>Carril administrado No</item>
-    <item>Estatus del módulo</item>
-    <item>Estatus de la pantalla informativa</item>
-    <item>Estatus del UCC</item>
-    <item>status del semáforo de tres luces</item>
-    <item>Estatus de la alarma sonora</item>
-    <item>Estatus de la alarma visual</item>
-    <item>Estatus del gabinete de barrera</item>
-    <item>Estatus de la barrera de paso</item>
-    <item>Estatus de los sensores de presencia (lazos)</item>
-    <item>Estatus del ponchallantas (solo salida)</item>
-    <item>Contratación de Infraestructura auxiliar PITA</item>
-    <item>Estatus del espacio para planta de emergencia</item>
-    <item>Estatus de planta de emergencia</item>
-    <item>Estatus de IDF ́s. (cuarto de comunicaciones que se usa de forma intermedia para poder conectar elementos a la red del SAT)</item>
-    <item>Contratación de sistemas informáticos PITA</item>
-    <item>Estatus del sistema SIAVE</item>
-    <item>Estatus del sistema SIECA</item>
-    <item>Estatus del sistema SIRIA</item>
-    <item></item>
-    <item></item>
-    <item></item>
-    <item></item>
+    <item>Cuenta con posiciones de control de carga peatonal</item>
+    <item>Posición de control de carga peatonal no</item>
+    <item>Panel informativo electrónico de carril</item>
+    <item>Sensores de detección de persona en carril</item>
+    <item>Barrera de paso peatonal (puertas abatibles)</item>
+    <item>Controlador para regular y monitorear todos los dispositivos</item>
+    <item>Lectora RFID de proximidad</item>
+    <item>Interfón de un nivel</item>
+    <item>Alarma sonora y visual</item>
+    <item>Señalización en general (letreros)</item>
+    <item>Control de carga peatonal</item>
+    <item>Cuenta con equipos móviles</item>
+
+
+    <item>Equipos móviles </item>
+    <item>Toughpad</item>
+    <item>Cargador</item>
+    <item>Funda</item>
+
+    <item>Equipos móviles</item>
+    <item>Cuenta con zonas de amarillos de carga</item>
+    <item>Zona de amarillos de carga</item>
+    <item>Equipos móviles </item>
+    <item>Panel Informativo (zona de espera y de revisión)</item>
+    <item>Señalización en general (letreros)</item>
+
+    <item>Zonas de amarillos de carga</item>
+    <item>Cuenta con zonas de rojos de carga</item>
+    <!-- -->
+    <item>Zona de rojos de carga no</item>
+    <item>Pantalla informativa</item>
+
+    <item>Señalización en general (letreros)</item>
+    <item>Zonas de rojos de carga</item>
+
+    <item>Cuenta con espacios de estacionamiento para revisión en zona de carga</item>
+    <item>Espacio de estacionamiento para revisión en zona de carga</item>
+
+    <item>Sensores de presencia espacio de estacionamiento</item>
+    <item>Espacio de estacionamiento</item>
+
+    <item>Cuenta con carriles administrados</item>
+
+    <item>Carril administrado no</item>
+    <item>Pantalla informativa</item>
+    <item>UCC</item>
+    <item>Semáforo de tres luces</item>
+    <item>Alarma sonora</item>
+    <item>Alarma visual</item>
+    <item>Barrera de paso</item>
+    <item>Sensores de presencia (lazos)</item>
+    <item>Ponchallantas (solo salida)</item>
+    <item>Carril administrado </item>
+
+    <item>Cuenta con Centro de Monitoreo</item>
+    <item>Estaciones instaladas en el Centro de Monitoreo (2 monitores por espacio, diadema y micrófono, visualización de camaras, estaciones de trabajo y sillas)</item>
+    <item>Estaciones instaladas</item>
+    <item>Estaciones instaladas en el centro de monitoreo para video-vigilancia</item>
+    <item>Estaciones instaladas</item>
+    <item>Espacio de operadores de rayos gamma/X </item>
+    <item>Espacio de rayos gamma/X </item>
+    <item>Espacio, servicios eléctricos y de comunicaciones, conectado a la red LAN</item>
+    <item>Control de acceso al Centro de Monitoreo, video-vigilancia y cuarto de comunicaciones</item>
+    <item>Aires acondicionados para cada uno de los espacios que conformen el centro de monitoreo incluyendo las áreas comunes</item>
+    <item>Sistema de alarma y detección de humo para el centro de monitoreo</item>
+    <item>Señalización informativa y preventiva</item>
+    <item>Plantas de emergencia</item>
+    <item>Cuenta con rayos “X”</item>
+    <item>Posiciones móviles de rayos X</item>
+    <item>Posiciones fijas de rayos X</item>
+    <item>Cuenta con rayos gamma</item>
+    <item>Posiciones móviles de rayos gamma</item>
+    <item>Posiciones fijas de rayos gamma</item>
+    <item>Espacios para caninos (perrera)</item>
     <item></item>
     </string-array>
 

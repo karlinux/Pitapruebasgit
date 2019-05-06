@@ -178,7 +178,7 @@ public class Bitacoratextopita extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 inserta.abrir();
-                inserta.actualizaPregunta(id, "9", "uno");
+                inserta.actualizaPregunta(id, "9", "uno", "0");
                 inserta.cerrar();
                 Intent intent = new Intent(".Preguntapita");
                 startActivity(intent);

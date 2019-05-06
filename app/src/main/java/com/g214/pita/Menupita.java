@@ -127,16 +127,22 @@ public class Menupita extends AppCompatActivity {
         btn2.setText("VIDEO VIGILANCIA");
         btn3.setText("VEHICULOS LIGEROS");
         btn4.setText("VEHICULOS DE CARGA");
-        btn5.setText("INFRAEXTRUCTURA AUXILIAR");
-        btn6.setText("OTROS");
+        btn5.setText("INFRAEXTRUCTURA AUXILIAR Y OTROS");
+        btn6.setText("XX");
         btn7.setText("REGRESAR");
-        btn8.setText("FOTOS");
+        btn8.setText("FOTOS VIDEO VIGILANCIA");
 
         tvUsuario.setText(puntoTactico);
-
+        btn6.setVisibility(View.GONE);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                inserta.abrir();
+                inserta.actualizaPunto(punto, puntoTactico);
+                inserta.cerrar();
+
                 bolsa = new Bundle();
                 bolsa.putString("numpregunta", "0");
                 Intent intent = new Intent(".Domiciliopita");
@@ -184,6 +190,19 @@ public class Menupita extends AppCompatActivity {
             }
         });
 
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bolsa = new Bundle();
+                bolsa.putString("numpregunta", "102");
+                Intent intent = new Intent(".Multipuntopita");
+                intent.putExtras(bolsa);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,8 +219,16 @@ public class Menupita extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(".Imagenespita");
+                inserta.abrir();
+                inserta.actualizaFotos(punto, "1");
+                inserta.cerrar();
+
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
+                finish();
+
+               // Intent intent = new Intent(".Imagenespita");
+               // startActivity(intent);
             }
         });
 

@@ -108,6 +108,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/razonseparacion"
         android:spinnerMode="dialog" />
+        <ListView
+            android:id="@+id/lvLista"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textAlignment="center">
+        </ListView>
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="@dimen/anchoboton"
@@ -138,12 +144,6 @@
         android:textColor="@color/colortextobotones"
         android:text="Regresar"
         android:textSize="@dimen/textoboton"/>
-        <ListView
-            android:id="@+id/lvLista"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:textAlignment="center">
-        </ListView>
 </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

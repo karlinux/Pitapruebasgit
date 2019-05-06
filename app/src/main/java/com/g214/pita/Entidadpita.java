@@ -39,7 +39,7 @@ public class Entidadpita extends AppCompatActivity implements AdapterView.OnItem
     View convertView;
     EditText etColonia;
 
-    String municipio, selectEntidad, selectMunicipio, selectLocalidad, colonia, entidad, localidad, id, entidadBase, municipioBase, Siguiente;
+    String municipio, selectEntidad, selectMunicipio, selectLocalidad, colonia, entidad, localidad, id, entidadBase, municipioBase, Siguiente, FOLIOENCUESTA;
     private Spinner spEntidad, spMunicipio, spLocalidad;
     String[] arrayEntidad;
     ArrayList<String> nameList, nameListloc;
@@ -55,11 +55,14 @@ public class Entidadpita extends AppCompatActivity implements AdapterView.OnItem
         setSupportActionBar(toolbar);
         arrayEntidad = getResources().getStringArray(R.array.entidad);
 
-        if(CAMPO.equals("1")){
-            Siguiente=".Foto" + APK;
-        }else{
-            Siguiente=".Empresa" + APK;
-        }
+        inserta.abrir();
+        Cursor curPunto = inserta.punto();
+        curPunto.moveToLast();
+        FOLIOENCUESTA = curPunto.getString(0);
+        inserta.cerrar();
+
+        Siguiente=".Empresa" + APK;
+
 
         ligt =Typeface.createFromAsset(getAssets(), "fonts/montserratLight.otf");
         regular=Typeface.createFromAsset(getAssets(), "fonts/montserratRegular.otf");
@@ -140,9 +143,9 @@ public class Entidadpita extends AppCompatActivity implements AdapterView.OnItem
                     inserta.abrir();
                     if(!entidadBase.equals("") && !municipioBase.equals("")){
 
-                        inserta.actualizaEntidad(id,localidad);
+                        inserta.actualizaEntidad(FOLIOENCUESTA, localidad);
                     }else{
-                        inserta.actualizaEntidad(id,entidad, municipio, localidad, colonia);
+                        inserta.actualizaEntidad(FOLIOENCUESTA, entidad, municipio, localidad, colonia);
                     }
                     inserta.cerrar();
 

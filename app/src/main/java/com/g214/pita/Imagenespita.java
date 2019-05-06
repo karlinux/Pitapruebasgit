@@ -110,28 +110,29 @@ public class Imagenespita extends AppCompatActivity {
 
         tvUsuario.setText(puntoTactico);
 
+        //Video vigilancia
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "1");
+                inserta.actualizaFotos(FOLIOENCUESTA, "1");
                 inserta.cerrar();
 
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
         });
-
+        //Vehiculos ligeros
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "2");
+                inserta.actualizaFotos(FOLIOENCUESTA, "2");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -142,9 +143,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "3");
+                inserta.actualizaFotos(FOLIOENCUESTA, "3");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -155,9 +156,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "4");
+                inserta.actualizaFotos(FOLIOENCUESTA, "4");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -168,9 +169,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "5");
+                inserta.actualizaFotos(FOLIOENCUESTA, "5");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -181,9 +182,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "6");
+                inserta.actualizaFotos(FOLIOENCUESTA, "6");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -194,9 +195,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "7");
+                inserta.actualizaFotos(FOLIOENCUESTA, "7");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -207,9 +208,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "8");
+                inserta.actualizaFotos(FOLIOENCUESTA, "8");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -220,9 +221,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "9");
+                inserta.actualizaFotos(FOLIOENCUESTA, "9");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }
@@ -233,9 +234,9 @@ public class Imagenespita extends AppCompatActivity {
             public void onClick(View view) {
 
                 inserta.abrir();
-                inserta.actualizaFoto(FOLIOENCUESTA, "10");
+                inserta.actualizaFotos(FOLIOENCUESTA, "10");
                 inserta.cerrar();
-                Intent intent = new Intent(".Fotopita");
+                Intent intent = new Intent(".Fotocarrilespita");
                 startActivity(intent);
                 finish();
             }

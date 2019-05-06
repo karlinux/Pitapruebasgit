@@ -56,7 +56,7 @@ public class Buscarpita extends AppCompatActivity {
         setContentView(R.layout.activity_buscar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar); 
 
         TelephonyManager telephonyManager;
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -71,7 +71,7 @@ public class Buscarpita extends AppCompatActivity {
         btnSiguiente = (Button) findViewById(R.id.btnIniciar);
 
         btnSalir.setText("REGRESAR");
-
+        btnSiguiente.setVisibility(View.GONE);
         etNombre = (EditText) findViewById(R.id.etNombre);
         //tvNombre = (TextView) findViewById(R.id.tvNombre);
         etNombre.setHint("PUNTO TÁCTICO");

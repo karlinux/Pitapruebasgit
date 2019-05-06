@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -67,12 +68,20 @@ public class Domiciliopita extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Regresar = ".Menu"+ APK;
+
+        inserta.abrir();
+        Cursor curPunto = inserta.punto();
+        curPunto.moveToLast();
+        FOLIOENCUESTA = curPunto.getString(0);
+        inserta.cerrar();
+
         inserta.abrir();
         usuario = inserta.usuario();
         idusuario = inserta.idusuario();
         id = inserta.iden();
         fecha = inserta.fecha("encuesta", "FECHAENTREVISTA");
         inserta.cerrar();
+
 
         TelephonyManager telephonyManager;
         telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -94,20 +103,6 @@ public class Domiciliopita extends AppCompatActivity {
         inicio = stringInicio.toString();
 
         StringBuilder stringFecha = new StringBuilder();
-
-        stringFecha.append(imei);
-        stringFecha.append(fecha.substring(0,4));
-        stringFecha.append(fecha.substring(5,7));
-        stringFecha.append(fecha.substring(8,10));
-        stringFecha.append(fecha.substring(11,13));
-        stringFecha.append(fecha.substring(14,16));
-        stringFecha.append(fecha.substring(17,19));
-        stringFecha.append(id);
-
-
-        FOLIOENCUESTA = stringFecha.toString();
-
-
 
         tvVersion = (TextView) findViewById(R.id.tvVersion);
         btnIniciar = (Button) findViewById(R.id.btnIniciar);
@@ -207,7 +202,7 @@ public class Domiciliopita extends AppCompatActivity {
                         colonia = etColonia.getText().toString();
                     }
                     inserta.abrir();
-                    inserta.actualizaDomicilio(id, cp, calle, numext, numint, cveedo, cvemun, FOLIOENCUESTA, imei, colonia, inicio, usuario, idusuario);
+                    inserta.actualizaDomicilio(FOLIOENCUESTA, cp, calle, numext, numint, cveedo, cvemun, imei, colonia, inicio, usuario, idusuario);
                     inserta.cerrar();
                     Intent intent = new Intent(getApplicationContext(), Entidadpita.class);
                     startActivity(intent);
